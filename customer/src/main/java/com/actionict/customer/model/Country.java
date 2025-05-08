@@ -15,9 +15,12 @@ public class Country {
     @Column(name = "country_id")
     private Integer id;
 
-    @Column(name = "name")
+    @Column(name = "name", lenght=50)
     private String name;
 
     @Column(name = "last_update")
     private LocalDateTime lastUpdate;
+
+    @OneToMany(mappedBy="country", cascade=CascadeType.All, orphanRemoval=true)
+    private List<City> cities;
 }
