@@ -23,14 +23,16 @@ public class CountryService {
         return countryRepository.findById(id);
     }
 
+    //Dubbio: lastUpdate non lo metto tra i parametri
     //Inserisci
-    public void inserisci(String name) {
-        Country country=new Country (name);
+    public void inserisci(Integer id, String name) {
+        Country country=new Country (id, name);
         countryRepository.save(country);
     }
 
+    //Dubbio: lastUpdate non lo metto tra i parametri
     //Aggiorna
-    public void Update(Integer id, String newName) {
+    public void update(Integer id, String newName) {
         Country country=countryRepository.findById(id);
         country.setName(newName);
         countryRepository.save(country);
