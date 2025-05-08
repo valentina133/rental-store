@@ -17,7 +17,36 @@ public class CountryController {
     private final CountryService countryService;
 
     @GetMapping
-    public List<Country> getAllCountries() {
-        return countryService.findAll();
+    public List<Country> getAllCountries() {return countryService.findAll();}
+
+    //trova uno
+    @GetMapping("/{id}")
+    public List<Country> getCountries(@PathVariable Integer id){
+        return countryService.findById(id);
     }
+
+    //inserisci
+    @PostMapping
+    public void addCountry(@RequestBody Country country) {
+        countryService.inserisci(country);
+    }
+
+    //aggiorna
+    @PutMapping
+    public void updateCountry(@RequestBody Country country){
+        countryService.update(country);
+    }
+   /* @PutMapping("/{id}")  //?  ToDo
+    public void updateCountry(@RequestBody Country country, @PathVariable Integer id){
+        countryService.update(country);
+    }
+*/
+    //Elimina
+    @DeleteMapping("/{id}")
+    public void deleteCountry(@PathVariable Integer id){
+        countryService.deleteById(id);
+    }
+
+
+
 }
