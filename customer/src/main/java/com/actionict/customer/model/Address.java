@@ -34,7 +34,7 @@ public class Address {
     private LocalDateTime lastUpdate;
 
     @ManyToOne
-    @JoinColumn(name="city_id", nullable=false)
+    @JoinColumn(name="city_id", referencedColumnName = "id", nullable=false)
     private City city;
 
     @OneToMany(mappedBy="address", cascade=CascadeType.All, orphanRemoval=true)

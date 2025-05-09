@@ -22,7 +22,7 @@ public class City {
     private LocalDateTime lastUpdate;
 
     @ManyToOne
-    @JoinColumn(name="country_id", nullable=false)
+    @JoinColumn(name="country_id", referencedColumnName = "id", nullable=false)
     private Country country;
 
     @OneToMany(mappedBy="city", cascade=CascadeType.All, orphanRemoval=true)
