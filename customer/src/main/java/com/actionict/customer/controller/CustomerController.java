@@ -53,7 +53,8 @@ public class CustomerController {
     //Ricerca filtrata e paginata
     @GetMapping
     public Page<Customer> getPaginatedCustomersFirstNameOppByName(
-            @RequestParam String byFirstNameOppByLastName,
+            @RequestParam (required=false) String firstName,
+            @RequestParam (required=false) String lastName,
             @RequestParam(defaultValue="0") int page,
             @RequestParam(defaultValue="10") int size) {
         return customerService.getPaginatedByFirstNameOppByLastNameCustomers(byFirstNameOppByLastName, page, size);
