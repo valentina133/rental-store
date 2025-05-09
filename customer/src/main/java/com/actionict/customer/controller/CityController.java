@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class CityController {
 
     //trova uno
     @GetMapping("/{id}")
-    public List<City> getCity(@PathVariable Integer id){
+    public Object getCity(@PathVariable Integer id){
         return cityService.findById(id);
     }
 

@@ -3,9 +3,7 @@ package com.actionict.customer.controller;
 import com.actionict.customer.model.Country;
 import com.actionict.customer.service.CountryService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,7 +19,7 @@ public class CountryController {
 
     //trova uno
     @GetMapping("/{id}")
-    public List<Country> getCountries(@PathVariable Integer id){
+    public Object getCountries(@PathVariable Integer id){
         return countryService.findById(id);
     }
 

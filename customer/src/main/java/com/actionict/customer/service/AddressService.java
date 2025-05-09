@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -18,20 +20,22 @@ public class AddressService {
     }
 
     //Trova Uno
-    public Address findById(Integer id) {
+    public Object findById(Integer id) {
 
-        return addressRepository.findById(id);
+        Optional<Address> byId = addressRepository.findById(id);
+        return byId;
+        //return addressRepository.findById(id);
     }
 
     //Inserisci
     public void inserisci(Integer id, String address, String address2, String district, String postalCode, String phone) {
-        Address address=new Address (id, address, address2, district, postalCode, phone);
-        addressRepository.save(address);
+        Address addressOfInsert=new Address (id, address, address2, district, postalCode, phone);
+        addressRepository.save(addressOfInsert);
     }
 
     //Aggiorna
     public void update(Integer id, String newAddress, String newAddress2, String newDistrict, String newPostalCode, String newPhone) {
-        Address address=addressRepository.findById(id);
+        Optional<Address> address=addressRepository.findById(id);
         address.setAddress(newAddress);
         address.setAddress2(newAddress2);
         address.setDistrict(newDistrict);
