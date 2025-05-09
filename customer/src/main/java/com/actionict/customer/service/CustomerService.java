@@ -45,8 +45,14 @@ public class CustomerService {
 
     //ToDo
     //Ricerca filtrata e paginata
-    public Page<Customer> getPaginatedCustomers (int page, int size) {
+    public Page<Customer> getPaginatedByFirstNameOppByLastNameCustomers (String byFirstNameOppByLastName, int page, int size) {
+        Pageable pageable=PageRequest.of(page, size);
+        if (byFirstNameOppByLastName=="firstName") return customerRepository.findByFirstName(firstName, pageable);
+        if (byFirstNameOppByLastName=="lastName") return customerRepository.findByLastName(lastName, pageable);
+    }
+    /*public Page<Customer> getPaginatedCustomers (int page, int size) {
         Pageable pageable=PageRequest.of(page, size);
         return customerRepository.findAll(pageable);
     }
+     */
 }

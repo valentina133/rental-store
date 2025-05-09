@@ -49,12 +49,20 @@ public class CustomerController {
         customerService.deleteById(id);
     }
 
-    //ToDo ? da risolvere come fa a discernere tra le due getMapping
+    //ToDo ? Discernetra le due getMapping aggiungendo all'endpoint la coppia chiave-valore GET /customers?byFirstNameOppByLastName=lastName
     //Ricerca filtrata e paginata
     @GetMapping
+    public Page<Customer> getPaginatedCustomersFirstNameOppByName(
+            @RequestParam String byFirstNameOppByLastName,
+            @RequestParam(defaultValue="0") int page,
+            @RequestParam(defaultValue="10") int size) {
+        return customerService.getPaginatedByFirstNameOppByLastNameCustomers(byFirstNameOppByLastName, page, size);
+    }
+   /* @GetMapping
     public Page<Customer> getPaginatedCustomers(
             @RequestParam(defaultValue="0") int page,
             @RequestParam(defaultValue="10") int size) {
         return customerService.getPaginatedCustomers(page, size);
     }
+    */
 }
