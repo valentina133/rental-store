@@ -1,9 +1,13 @@
 package com.actionict.customer.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
+@AllArgsConstructor
 
 @Data
 @Entity
@@ -15,19 +19,19 @@ public class Address {
     @Column(name = "address_id")
     private Integer id;
 
-    @Column(name = "address", lenght=50)
+    @Column(name = "address", length=50)
     private String address;
 
-    @Column(name = "address2", lenght=50)
+    @Column(name = "address2", length=50)
     private String address2;
 
-    @Column(name = "district", lenght=20)
+    @Column(name = "district", length=20)
     private String district;
 
-    @Column(name = "postal_code", lenght=10)
+    @Column(name = "postal_code", length=10)
     private String postalCode;
 
-    @Column(name = "phone", lenght=20)
+    @Column(name = "phone", length=20)
     private String phone;
 
     @Column(name = "last_update")

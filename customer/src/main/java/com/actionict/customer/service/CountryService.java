@@ -9,6 +9,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+
 public class CountryService {
 
     private final CountryRepository countryRepository;
@@ -18,7 +19,7 @@ public class CountryService {
     }
 
     //Trova Uno
-    public Country findById(Integer id) {
+    public Object findById(Integer id) {
 
         return countryRepository.findById(id);
     }
@@ -33,7 +34,8 @@ public class CountryService {
     //Dubbio: lastUpdate non lo metto tra i parametri
     //Aggiorna
     public void update(Integer id, String newName) {
-        Country country=countryRepository.findById(id);
+        Object countryObject=countryRepository.findById(id);
+        Country country=(Country) countryObject;
         country.setName(newName);
         countryRepository.save(country);
     }

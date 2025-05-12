@@ -1,11 +1,12 @@
 package com.actionict.customer.service;
 
-import com.actionict.customer.model.Cit;
+import com.actionict.customer.model.City;
 import com.actionict.customer.repository.CityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -18,7 +19,7 @@ public class CityService {
     }
 
     //Trova Uno
-    public City findById(Integer id) {
+    public Object findById(Integer id) {
 
         return cityRepository.findById(id);
     }
