@@ -10,4 +10,5 @@ import java.util.List;
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
     Page<Customer> findByFirstName(String firstName, Pageable pageable);
     Page<Customer> findByLastName(String lastName, Pageable pageable);
+    Page<Customer> findByFirstNameAndLastName(String firstName, String lastName, Pageable pageable);
 }

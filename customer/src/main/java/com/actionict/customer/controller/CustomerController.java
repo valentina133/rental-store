@@ -67,13 +67,12 @@ public class CustomerController {
     //ToDo ? Discernetra le due getMapping aggiungendo all'endpoint la coppia chiave-valore GET /customers?byFirstNameOppByLastName=lastName
     //Ricerca filtrata e paginata
     @GetMapping
-    public Page<Customer> getPaginatedCustomersFirstNameOppByName(
-            @RequestParam String fNopplN,
-            String firstName,
-            String lastName,
+    public Page<Customer> getFilterPaginatedCustomers(
+            @RequestParam (required = false) String firstName,
+            @RequestParam (required = false) String lastName,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size){
 
-        return customerService.getPaginatedByFirstNameOppByLastNameCustomers(fNopplN, firstName, lastName, page, size);
+        return customerService.searchFilterPaginatedCustomers(firstName, lastName, page, size);
     }
 }
