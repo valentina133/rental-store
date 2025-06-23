@@ -29,21 +29,33 @@ public class AddressService {
 
     //Inserisci
     public void inserisci(Integer id, String address, String address2, String district, String postalCode, String phone) {
-        Address addressOfInsert=new Address (id, address, address2, district, postalCode, phone);
+        Address addressOfInsert=new Address();
+        //addressOfInsert.setId(id);
+        addressOfInsert.setAddress(address);
+        addressOfInsert.setAddress2(address2);
+        addressOfInsert.setDistrict(district);
+        addressOfInsert.setPostalCode(postalCode);
+        addressOfInsert.setPhone(phone);
         addressRepository.save(addressOfInsert);
     }
 
     //Aggiorna
     public void update(Integer id, String newAddress, String newAddress2, String newDistrict, String newPostalCode, String newPhone) {
-        Optional<Address> address=addressRepository.findById(id);
-        address.setAddress(newAddress);
-        address.setAddress2(newAddress2);
-        address.setDistrict(newDistrict);
-        address.setPostalCode(newPostalCode);
-        address.setPhone(newPhone);
-        addressRepository.save(address);
+        Optional<Address> address = addressRepository.findById(id);
+        //Address address = (Address) addressObject;
+        //address.setId(id);
+        //address.get().setId(id); //non serve, c'è GenerationType.IDENTITY
+        address.get().setAddress(newAddress);
+        address.get().setAddress2(newAddress2);
+        address.get().setDistrict(newDistrict);
+        address.get().setPostalCode(newPostalCode);
+        address.get().setPhone(newPhone);
+        addressRepository.save(address.get());
     }
 
-    //Elimina
-    public void deleteById(Integer id) { addressRepository.deleteById(id); }
-}
+
+        //Elimina
+        public void deleteById (Integer id){
+            addressRepository.deleteById(id);
+        }
+    }

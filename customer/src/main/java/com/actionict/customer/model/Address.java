@@ -1,13 +1,14 @@
 package com.actionict.customer.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+//import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-@AllArgsConstructor
+@RequiredArgsConstructor
+//@AllArgsConstructor
 
 @Data
 @Entity
@@ -38,9 +39,10 @@ public class Address {
     private LocalDateTime lastUpdate;
 
     @ManyToOne
-    @JoinColumn(name="city_id", referencedColumnName = "id", nullable=false)
+    //@JoinColumn(name="city_id", referencedColumnName = "id", nullable=false)
+    @JoinColumn(name="city_id", nullable=false)
     private City city;
 
-    @OneToMany(mappedBy="address", cascade=CascadeType.All, orphanRemoval=true)
+    @OneToMany(mappedBy="address", orphanRemoval=true)
     private List<Customer> customer;
 }

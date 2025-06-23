@@ -31,19 +31,20 @@ public class CityController {
     //inserisci
     @PostMapping
     public void addCity(@RequestBody City city) {
-        cityService.inserisci(city);
+        Integer id=city.getId();
+        String name= city.getName();
+        cityService.inserisci(id, name);
     }
 
     //aggiorna ok
     @PutMapping
     public void updateCity(@RequestBody City city){
-        cityService.update(city);
+        Integer id=city.getId();
+        String name= city.getName();
+        cityService.update(id, name);
     }
-    /*@PutMapping("/{id}")  //?  ToDo
-    public void updateCity(@RequestBody City city, @PathVariable Integer id){
-        cityService.update(city);
-    }
-*/
+
+
     //Elimina ok
     @DeleteMapping("/{id}")
     public void deleteCity(@PathVariable Integer id){

@@ -1,7 +1,7 @@
 package com.actionict.customer.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+//import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -11,7 +11,8 @@ import java.util.List;
 //import jakarta.persistence.CascadeType.All;
 
 import lombok.RequiredArgsConstructor;
-@AllArgsConstructor
+@RequiredArgsConstructor
+//@AllArgsConstructor
 
 @Data
 @Entity
@@ -29,6 +30,6 @@ public class Country {
     @Column(name = "last_update")
     private LocalDateTime lastUpdate;
 
-    @OneToMany(mappedBy="country", cascade=CascadeType.All, orphanRemoval=true)
+    @OneToMany(mappedBy="country", orphanRemoval=true)
     private List<City> cities;
 }

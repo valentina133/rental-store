@@ -30,37 +30,41 @@ public class CustomerService {
 
     //Inserisci
     public void inserisci(Integer id, String firstName, String lastName, String email, Boolean active, LocalDateTime createData) {
-        Customer customer=new Customer (id, firstName, lastName, email, active, createData);
+        Customer customer = new Customer();
+        //customer.setId(id);
+        customer.setFirstName(firstName);
+        customer.setLastName(lastName);
+        customer.setEmail(email);
+        customer.setActive(active);
+        customer.setCreateDate(createData);
         customerRepository.save(customer);
     }
 
     //Aggiorna
     public void update(Integer id, String newFirstName, String newLastName, String newEmail, Boolean newActive, LocalDateTime newCreateDate) {
-        Optional<Customer> customer=customerRepository.findById(id);
-        customer.setFirstName(newFirstName);
-        customer.setLastName(newLastName);
-        customer.setEmail(newEmail);
-        customer.setActive(newActive);
-        customer.setCreateDate(newCreateDate);
-        customerRepository.save(customer);
+        Optional<Customer> customer = customerRepository.findById(id);
+        //Customer customer = (Customer) customerObject;
+        //customer.setId(id);
+        customer.get().setFirstName(newFirstName);
+        customer.get().setLastName(newLastName);
+        customer.get().setEmail(newEmail);
+        customer.get().setActive(newActive);
+        customer.get().setCreateDate(newCreateDate);
+        customerRepository.save(customer.get());
     }
 
     //Elimina
-    public void deleteById(Integer id) { customerRepository.deleteById(id); }
+    public void deleteById(Integer id) {
+        customerRepository.deleteById(id);
+    }
 
     //ToDo
     //Ricerca filtrata e paginata
-    public List<Customer> getPaginatedByFirstNameOppByLastNameCustomers (String firstName, String lastName, int page, int size) {
-        Pageable pageable= PageRequest.of(page, size);
+    public Page<Customer> getPaginatedByFirstNameOppByLastNameCustomers(String fNopplN, String firstName, String lastName, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
 
-        if (firstName!=null && lastName==null) return customerRepository.findByFirstName(firstName, pageable);
+        if (fNopplN != null && fNopplN == "fN") return customerRepository.findByFirstName(firstName, pageable);
         else return customerRepository.findByLastName(lastName, pageable);
-        //if (firstName!=null && lastName==null) return customerRepository.findByFirstName(firstName, pageable);
-        // else if (lastName!=null && firstName==null) return customerRepository.findByLastName(lastName, pageable);
+        //else if (fNopplN != null && fNopplN == "lN") return customerRepository.findByLastName(lastName, pageable);
     }
-    /*public Page<Customer> getPaginatedCustomers (int page, int size) {
-        Pageable pageable=PageRequest.of(page, size);
-        return customerRepository.findAll(pageable);
-    }
-     */
 }

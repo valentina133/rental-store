@@ -1,12 +1,13 @@
 package com.actionict.customer.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+//import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
-@AllArgsConstructor
+@RequiredArgsConstructor
+//@AllArgsConstructor
 
 @Data
 @Entity
@@ -46,6 +47,7 @@ public class Customer {
     private LocalDateTime lastUpdate;
 
     @ManyToOne
-    @JoinColumn(name="address_id", referencedColumnName = "id", nullable=false)
+    //@JoinColumn(name="address_id", referencedColumnName = "id", nullable=false)
+    @JoinColumn(name="address_id", nullable=false)
     private Address address;
 }

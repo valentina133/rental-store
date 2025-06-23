@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+
 @Service
 @RequiredArgsConstructor
 public class CityService {
@@ -26,17 +27,23 @@ public class CityService {
 
     //Inserisci
     public void inserisci(Integer id, String name) {
-        City city=new City (id, name);
+        City city = new City();
+        //city.setId(id);
+        city.setName(name);
         cityRepository.save(city);
     }
 
     //Aggiorna
     public void update(Integer id, String newName) {
-        City city=cityRepository.findById(id);
-        city.setName(newName);
-        cityRepository.save(city);
+        Optional <City> city = cityRepository.findById(id);
+        //City city = (City) cityObject;
+        //city.setName(newName);
+        city.get().setName(newName);
+        cityRepository.save(city.get());
     }
 
     //Elimina
-    public void deleteById(Integer id) { cityRepository.deleteById(id); }
+     public void deleteById(Integer id) {
+        cityRepository.deleteById(id);
+    }
 }
