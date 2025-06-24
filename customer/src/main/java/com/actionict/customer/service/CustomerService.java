@@ -29,7 +29,7 @@ public class CustomerService {
     }
 
     //Inserisci
-    public void inserisci(Integer id, String firstName, String lastName, String email, Boolean active, LocalDateTime createData) {
+    public void inserisci(String firstName, String lastName, String email, Boolean active, LocalDateTime createData) {
         Customer customer = new Customer();
         //customer.setId(id);
         customer.setFirstName(firstName);

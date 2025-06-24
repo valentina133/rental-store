@@ -26,9 +26,10 @@ public class CountryController {
     //inserisci
     @PostMapping
     public void addCountry(@RequestBody Country country) {
-        Integer id=country.getId();
+        //Integer id=country.getId();
         String name=country.getName();
-        countryService.inserisci(id, name);
+        countryService.inserisci(name);
+        //countryService.inserisci(id, name);
     }
 
     //aggiorna

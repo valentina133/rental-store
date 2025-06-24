@@ -32,13 +32,13 @@ public class AddressController {
     //inserisci
     @PostMapping
     public void addAddress(@RequestBody Address address) {
-        Integer id=address.getId();
+        //Integer id=address.getId();
         String addressParametro= address.getAddress();
         String address2= address.getAddress2();
         String district= address.getDistrict();
         String postalCode= address.getPostalCode();
         String phone= address.getPhone();
-        addressService.inserisci(id, addressParametro, address2, district, postalCode, phone);
+        addressService.inserisci(addressParametro, address2, district, postalCode, phone);
     }
 
     //aggiorna

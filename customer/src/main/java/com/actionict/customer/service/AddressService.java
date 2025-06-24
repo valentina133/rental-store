@@ -28,7 +28,7 @@ public class AddressService {
     }
 
     //Inserisci
-    public void inserisci(Integer id, String address, String address2, String district, String postalCode, String phone) {
+    public void inserisci(String address, String address2, String district, String postalCode, String phone) {
         Address addressOfInsert=new Address();
         //addressOfInsert.setId(id);
         addressOfInsert.setAddress(address);

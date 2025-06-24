@@ -36,13 +36,13 @@ public class CustomerController {
     //inserisci
     @PostMapping
     public void addCustomer(@RequestBody Customer customer) {
-        Integer id=customer.getId();
+        //Integer id=customer.getId();
         String firstName=customer.getFirstName();
         String lastName=customer.getLastName();
         String email=customer.getEmail();
         Boolean active=customer.getActive();
         LocalDateTime createData=customer.getCreateDate();
-        customerService.inserisci(id, firstName, lastName, email, active, createData);
+        customerService.inserisci(firstName, lastName, email, active, createData);
     }
 
     //aggiorna

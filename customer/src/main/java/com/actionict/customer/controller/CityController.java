@@ -31,9 +31,9 @@ public class CityController {
     //inserisci
     @PostMapping
     public void addCity(@RequestBody City city) {
-        Integer id=city.getId();
+        //Integer id=city.getId();
         String name= city.getName();
-        cityService.inserisci(id, name);
+        cityService.inserisci(name);
     }
 
     //aggiorna ok

@@ -28,7 +28,8 @@ public class CountryService {
     }
 
     //Inserisci
-    public void inserisci(Integer id, String name) {
+    public void inserisci(String name) {
+        //public void inserisci(Integer id, String name) {
         Country country = new Country();
         //country.setId(id);
         country.setName(name);

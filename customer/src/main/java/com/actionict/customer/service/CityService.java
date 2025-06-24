@@ -26,7 +26,7 @@ public class CityService {
     }
 
     //Inserisci
-    public void inserisci(Integer id, String name) {
+    public void inserisci(String name) {
         City city = new City();
         //city.setId(id);
         city.setName(name);
