@@ -63,23 +63,7 @@ public class CustomerService {
     public Page<Customer> searchFilterPaginatedCustomers(String firstName, String lastName, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
 
-        if (firstName != null) {
-            if (lastName != null) {
-
-                return customerRepository.findByFirstNameAndLastName(
-                        firstName, lastName, pageable);
-            }
-        } else {
-            return customerRepository.findByFirstName(firstName, pageable);
-        }
-
-        if (lastName == null) {
-            return customerRepository.findByLastName(lastName, pageable);
-        }
-
-        if (firstName == null && lastName == null) {
-            return customerRepository.findAll(pageable);
-        }
-
+                //return customerRepository.findByLastnameOrFirstname(firstName, lastName, pageable);  //da errore
+                return customerRepository.findByLastNameOrFirstName(firstName, lastName, pageable);
     }
 }

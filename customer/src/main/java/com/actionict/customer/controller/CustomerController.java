@@ -66,7 +66,8 @@ public class CustomerController {
 
     //ToDo ? Discernetra le due getMapping aggiungendo all'endpoint la coppia chiave-valore GET /customers?byFirstNameOppByLastName=lastName
     //Ricerca filtrata e paginata
-    @GetMapping
+    //@GetMapping cosi da errore in quanto vi è già un @GetMapping di getAllCustomers
+    @GetMapping("?firstName=mario&lastName=Rossi")
     public Page<Customer> getFilterPaginatedCustomers(
             @RequestParam (required = false) String firstName,
             @RequestParam (required = false) String lastName,
