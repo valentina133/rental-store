@@ -13,4 +13,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
     //Page<Customer> findByFirstNameAndLastName(String firstName, String lastName, Pageable pageable);
     //Page<Customer> findByLastnameOrFirstname(String firstName, String lastName, Pageable pageable);
     Page<Customer> findByLastNameOrFirstName(String firstName, String lastName, Pageable pageable);
+    /*Page<Customer> findByLastNameOrFirstName(String firstName, String lastName, Pageable pageable) {
+        Query query=select * from customer where first_name like '%str%' or last_name like '%str%'
+    }  */
 }
