@@ -29,7 +29,8 @@ public class City {
 
     @ManyToOne
     //@JoinColumn(name="country_id", referencedColumnName = "id", nullable=false)
-    @JoinColumn(name="country_id", nullable=false)
+    @JoinColumn(name="country_id", nullable=false) //dà errore: il valore nullo nella colonna "country_id" della relazione "city" viola il vincolo non nullo
+    //@JoinColumn(name="country_id") //dà lo stesso errore sopra
     private Country country;
 
     @OneToMany(mappedBy="city", orphanRemoval=true)

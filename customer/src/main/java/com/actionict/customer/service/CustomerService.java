@@ -64,6 +64,8 @@ public class CustomerService {
         Pageable pageable = PageRequest.of(page, size);
 
                 //return customerRepository.findByLastnameOrFirstname(firstName, lastName, pageable);  //da errore
-                return customerRepository.findByLastNameOrFirstName(firstName, lastName, pageable);
+                //return customerRepository.findByLastNameOrFirstName(firstName, lastName, pageable);
+
+                return customerRepository.findByLastNameOrFirstNameNative(firstName, lastName, pageable);
     }
 }
