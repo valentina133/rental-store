@@ -43,6 +43,8 @@ public class Address {
     @JoinColumn(name="city_id", nullable=false)
     private City city;
 
+    /* Lo tolgo perché il risultato della get è composto da una serie di oggetti annidati, oltre la strutture definita nel model
     @OneToMany(mappedBy="address", orphanRemoval=true)
     private List<Customer> customer;
+     */
 }

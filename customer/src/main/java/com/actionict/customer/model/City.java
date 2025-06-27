@@ -33,6 +33,8 @@ public class City {
     //@JoinColumn(name="country_id") //dà lo stesso errore sopra
     private Country country;
 
+    /* Lo tolgo perché il risultato della get è composto da una serie di oggetti annidati, oltre la strutture definita nel model
     @OneToMany(mappedBy="city", orphanRemoval=true)
     private List<Address> address;
+     */
 }
