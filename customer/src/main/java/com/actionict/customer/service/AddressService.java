@@ -1,6 +1,8 @@
 package com.actionict.customer.service;
 
 import com.actionict.customer.model.Address;
+import com.actionict.customer.model.City;
+import com.actionict.customer.model.Country;
 import com.actionict.customer.repository.AddressRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,7 +30,7 @@ public class AddressService {
     }
 
     //Inserisci
-    public void inserisci(String address, String address2, String district, String postalCode, String phone) {
+    public void inserisci(String address, String address2, String district, String postalCode, String phone, Integer id) {
         Address addressOfInsert=new Address();
         //addressOfInsert.setId(id);
         addressOfInsert.setAddress(address);
@@ -36,6 +38,9 @@ public class AddressService {
         addressOfInsert.setDistrict(district);
         addressOfInsert.setPostalCode(postalCode);
         addressOfInsert.setPhone(phone);
+        City city = new City();
+        city.setId(id);
+        addressOfInsert.setCity(city);
         addressRepository.save(addressOfInsert);
     }
 

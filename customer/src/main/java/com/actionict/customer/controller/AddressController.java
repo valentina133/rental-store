@@ -1,6 +1,8 @@
 package com.actionict.customer.controller;
 
 import com.actionict.customer.model.Address;
+import com.actionict.customer.model.City;
+import com.actionict.customer.model.Country;
 import com.actionict.customer.service.AddressService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,7 +40,9 @@ public class AddressController {
         String district= address.getDistrict();
         String postalCode= address.getPostalCode();
         String phone= address.getPhone();
-        addressService.inserisci(addressParametro, address2, district, postalCode, phone);
+        City city=address.getCity();
+        Integer id=city.getId();
+        addressService.inserisci(addressParametro, address2, district, postalCode, phone, id);
     }
 
     //aggiorna
@@ -46,7 +50,7 @@ public class AddressController {
     public void updateAddress(@RequestBody Address address){
         Integer id= address.getId();
         String addressParametro=address.getAddress();
-        String address2=address.getDistrict();
+        String address2=address.getAddress2();
         String district=address.getDistrict();
         String postalCode=address.getPostalCode();
         String phone=address.getPhone();

@@ -1,5 +1,7 @@
 package com.actionict.customer.service;
 
+import com.actionict.customer.model.Address;
+import com.actionict.customer.model.Country;
 import com.actionict.customer.model.Customer;
 import com.actionict.customer.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +31,7 @@ public class CustomerService {
     }
 
     //Inserisci
-    public void inserisci(String firstName, String lastName, String email, Boolean active, LocalDateTime createData) {
+    public void inserisci(String firstName, String lastName, String email, Boolean active, LocalDateTime createData, Integer id) {
         Customer customer = new Customer();
         //customer.setId(id);
         customer.setFirstName(firstName);
@@ -37,6 +39,9 @@ public class CustomerService {
         customer.setEmail(email);
         customer.setActive(active);
         customer.setCreateDate(createData);
+        Address address = new Address();
+        address.setId(id);
+        customer.setAddress(address);
         customerRepository.save(customer);
     }
 

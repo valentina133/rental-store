@@ -1,6 +1,7 @@
 package com.actionict.customer.service;
 
 import com.actionict.customer.model.City;
+import com.actionict.customer.model.Country;
 import com.actionict.customer.repository.CityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,10 +27,13 @@ public class CityService {
     }
 
     //Inserisci
-    public void inserisci(String name) {
+    public void inserisci(String name, Integer id) {
         City city = new City();
         //city.setId(id);
         city.setName(name);
+        Country country = new Country();
+        country.setId(id);
+        city.setCountry(country);
         cityRepository.save(city);
     }
 

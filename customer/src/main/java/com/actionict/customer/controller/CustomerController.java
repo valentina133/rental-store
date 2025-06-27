@@ -1,5 +1,7 @@
 package com.actionict.customer.controller;
 
+import com.actionict.customer.model.Address;
+import com.actionict.customer.model.Country;
 import com.actionict.customer.model.Customer;
 import com.actionict.customer.service.CustomerService;
 import lombok.RequiredArgsConstructor;
@@ -42,7 +44,9 @@ public class CustomerController {
         String email=customer.getEmail();
         Boolean active=customer.getActive();
         LocalDateTime createData=customer.getCreateDate();
-        customerService.inserisci(firstName, lastName, email, active, createData);
+        Address address=customer.getAddress();
+        Integer id=address.getId();
+        customerService.inserisci(firstName, lastName, email, active, createData, id);
     }
 
     //aggiorna
@@ -67,7 +71,9 @@ public class CustomerController {
     //ToDo ? Discernetra le due getMapping aggiungendo all'endpoint la coppia chiave-valore GET /customers?byFirstNameOppByLastName=lastName
     //Ricerca filtrata e paginata
     //@GetMapping cosi da errore in quanto vi è già un @GetMapping di getAllCustomers
-    @GetMapping("?firstName=mario&lastName=Rossi")
+    //@GetMapping("?firstName=mario&lastName=Rossi")
+    //@GetMapping("/native/?firstName=mario||lastName=Rossi")
+    @GetMapping("?firstName=mario||lastName=Rossi")
     public Page<Customer> getFilterPaginatedCustomers(
             @RequestParam (required = false) String firstName,
             @RequestParam (required = false) String lastName,

@@ -30,6 +30,9 @@ public class Country {
     @Column(name = "last_update")
     private LocalDateTime lastUpdate;
 
+    /*  Lo tolgo perché il risultato della get è composto da una serie di oggetti annidati, oltre la strutture definita nel model
     @OneToMany(mappedBy="country", orphanRemoval=true)
     private List<City> cities;
+
+     */
 }
