@@ -1,11 +1,14 @@
 package com.actionict.customer.service;
 
-import com.actionict.customer.model.Cit;
+import com.actionict.customer.model.City;
+import com.actionict.customer.model.Country;
 import com.actionict.customer.repository.CityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 
 @Service
 @RequiredArgsConstructor
@@ -18,24 +21,33 @@ public class CityService {
     }
 
     //Trova Uno
-    public City findById(Integer id) {
+    public Object findById(Integer id) {
 
         return cityRepository.findById(id);
     }
 
     //Inserisci
-    public void inserisci(Integer id, String name) {
-        City city=new City (id, name);
+    public void inserisci(String name, Integer id) {
+        City city = new City();
+        //city.setId(id);
+        city.setName(name);
+        Country country = new Country();
+        country.setId(id);
+        city.setCountry(country);
         cityRepository.save(city);
     }
 
     //Aggiorna
     public void update(Integer id, String newName) {
-        City city=cityRepository.findById(id);
-        city.setName(newName);
-        cityRepository.save(city);
+        Optional <City> city = cityRepository.findById(id);
+        //City city = (City) cityObject;
+        //city.setName(newName);
+        city.get().setName(newName);
+        cityRepository.save(city.get());
     }
 
     //Elimina
-    public void deleteById(Integer id) { cityRepository.deleteById(id); }
+     public void deleteById(Integer id) {
+        cityRepository.deleteById(id);
+    }
 }

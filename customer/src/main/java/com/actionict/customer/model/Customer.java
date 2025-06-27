@@ -1,9 +1,13 @@
 package com.actionict.customer.model;
 
 import jakarta.persistence.*;
+//import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import lombok.RequiredArgsConstructor;
+@RequiredArgsConstructor
+//@AllArgsConstructor
 
 @Data
 @Entity
@@ -20,13 +24,13 @@ public class Customer {
     @Column(name = "store_id")
     private byte storeId; // TINYINT
 
-    @Column(name = "first_name", lenght=45)
+    @Column(name = "first_name", length=45)
     private String firstName;
 
-    @Column(name = "last_name", lenght=45)
+    @Column(name = "last_name", length=45)
     private String lastName;
 
-    @Column(name = "email", lenght=50)
+    @Column(name = "email", length=50)
     private String email;
 
     @Column(name = "active")
@@ -43,6 +47,7 @@ public class Customer {
     private LocalDateTime lastUpdate;
 
     @ManyToOne
-    @JoinColumn(name="address_id", referencedColumnName = "id", nullable=false)
+    //@JoinColumn(name="address_id", referencedColumnName = "id", nullable=false)
+    @JoinColumn(name="address_id", nullable=false)
     private Address address;
 }

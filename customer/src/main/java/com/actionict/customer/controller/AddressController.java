@@ -1,13 +1,17 @@
 package com.actionict.customer.controller;
 
 import com.actionict.customer.model.Address;
+import com.actionict.customer.model.City;
+import com.actionict.customer.model.Country;
 import com.actionict.customer.service.AddressService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/addresses")
@@ -23,26 +27,37 @@ public class AddressController {
 
     //trova uno
     @GetMapping("/{id}")
-    public List<Address> getAddresses(@PathVariable Integer id){
+    public Object getAddresses(@PathVariable Integer id){
         return addressService.findById(id);
     }
 
     //inserisci
     @PostMapping
     public void addAddress(@RequestBody Address address) {
-        addressService.inserisci(address);
+        //Integer id=address.getId();
+        String addressParametro= address.getAddress();
+        String address2= address.getAddress2();
+        String district= address.getDistrict();
+        String postalCode= address.getPostalCode();
+        String phone= address.getPhone();
+        City city=address.getCity();
+        Integer id=city.getId();
+        addressService.inserisci(addressParametro, address2, district, postalCode, phone, id);
     }
 
     //aggiorna
     @PutMapping
     public void updateAddress(@RequestBody Address address){
-        addressService.update(address);
+        Integer id= address.getId();
+        String addressParametro=address.getAddress();
+        String address2=address.getAddress2();
+        String district=address.getDistrict();
+        String postalCode=address.getPostalCode();
+        String phone=address.getPhone();
+        addressService.update(id, addressParametro, address2, district, postalCode, phone);
     }
-    /*@PutMapping("/{id}")  //?  ToDo
-    public void updateAddress(@RequestBody Address address, @PathVariable Integer id){
-        addressService.update(address);
-    }
-*/
+
+
     //Elimina
     @DeleteMapping("/{id}")
     public void deleteAddress(@PathVariable Integer id){

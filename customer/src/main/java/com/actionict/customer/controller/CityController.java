@@ -1,11 +1,13 @@
 package com.actionict.customer.controller;
 
 import com.actionict.customer.model.City;
+import com.actionict.customer.model.Country;
 import com.actionict.customer.service.CityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,26 +25,29 @@ public class CityController {
 
     //trova uno
     @GetMapping("/{id}")
-    public List<City> getCity(@PathVariable Integer id){
+    public Object getCity(@PathVariable Integer id){
         return cityService.findById(id);
     }
 
     //inserisci
     @PostMapping
     public void addCity(@RequestBody City city) {
-        cityService.inserisci(city);
+        //Integer id=city.getId();
+        String name= city.getName();
+        Country country=city. getCountry();
+        Integer id=country.getId();
+        cityService.inserisci(name, id);
     }
 
     //aggiorna ok
     @PutMapping
     public void updateCity(@RequestBody City city){
-        cityService.update(city);
+        Integer id=city.getId();
+        String name= city.getName();
+        cityService.update(id, name);
     }
-    /*@PutMapping("/{id}")  //?  ToDo
-    public void updateCity(@RequestBody City city, @PathVariable Integer id){
-        cityService.update(city);
-    }
-*/
+
+
     //Elimina ok
     @DeleteMapping("/{id}")
     public void deleteCity(@PathVariable Integer id){
