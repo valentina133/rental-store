@@ -29,8 +29,7 @@ public class City {
 
     @ManyToOne
     //@JoinColumn(name="country_id", referencedColumnName = "id", nullable=false)
-    @JoinColumn(name="country_id", nullable=false) //dà errore: il valore nullo nella colonna "country_id" della relazione "city" viola il vincolo non nullo
-    //@JoinColumn(name="country_id") //dà lo stesso errore sopra
+    @JoinColumn(name="country_id", nullable=false) //dà errore: il valore nullo nella colonna "country_id" della relazione "city" viola il vincolo non nullo : perchè bisogna aggiungere il country_id nel controller e service di City
     private Country country;
 
     /* Lo tolgo perché il risultato della get è composto da una serie di oggetti annidati, oltre la strutture definita nel model

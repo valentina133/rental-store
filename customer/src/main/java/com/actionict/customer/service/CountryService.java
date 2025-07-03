@@ -31,7 +31,7 @@ public class CountryService {
     public void inserisci(String name) {
         //public void inserisci(Integer id, String name) {
         Country country = new Country();
-        //country.setId(id);
+        //country.setId(id);   //Non serve perché c'è l'autoincrementante sul model @GeneratedValue(strategy = GenerationType.IDENTITY)
         country.setName(name);
         countryRepository.save(country);
     }
