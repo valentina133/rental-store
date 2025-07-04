@@ -9,7 +9,8 @@ import lombok.RequiredArgsConstructor;
 
 @Data
 @Entity
-@Table(name = "film_actor")
+@Table(name = "film_actor")     //Tabella con chiave composta
+@IdClass(FilmActorChiaveComposta.class)
 public class FilmActor {
 
     // @Id
@@ -18,10 +19,12 @@ public class FilmActor {
     @Column(name = "last_update")
     private LocalDateTime lastUpdate;
 
+    @Id  //chiave composta
     @ManyToOne
     @JoinColumn(name="actor_id", nullable=false)
     private Actor actor;
 
+    @Id   //chiave composta
     @ManyToOne
     @JoinColumn(name="film_id", nullable=false)
     private Film film;
