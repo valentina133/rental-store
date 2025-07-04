@@ -4,7 +4,6 @@ package com.actionict.inventory.model;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDateTime;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 

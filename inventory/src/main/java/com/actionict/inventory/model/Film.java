@@ -1,9 +1,14 @@
-package com.actionict.customer.model;
+//package com.actionict.customer.model;
+package com.actionict.inventory.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+
 import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 

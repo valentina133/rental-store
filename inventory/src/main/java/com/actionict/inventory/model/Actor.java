@@ -4,7 +4,6 @@ package com.actionict.inventory.model;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDateTime;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 
@@ -19,10 +18,10 @@ public class Actor {
     private Integer id;
 
     @Column(name = "first_name", length=45)
-    private String name;
+    private String first_name;
 
     @Column(name = "last_name", length=45)
-    private String name;
+    private String last_name;
 
     @Column(name = "last_update")
     private LocalDateTime lastUpdate;
