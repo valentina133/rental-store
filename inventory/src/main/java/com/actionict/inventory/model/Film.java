@@ -36,22 +36,22 @@ public class Film {
 
     //campo di tipo YEAR sul DB
     @Column(name = "release_year")
-    private Integer release_year;
+    private Integer releaseYear;
 
     //campo di tipo TINYINT sul DB
     @ColumnDefault("NULL")
     @Column(name = "original_language_id")
-    private Integer original_language_id;
+    private Integer originalLanguageId;
 
     //campo di tipo TINYINT sul DB
     @ColumnDefault("3")
     @Column(name = "rental_duration", nullable=false)
-    private Integer rental_duration;
+    private Integer rentalDuration;
 
     //campo di tipo DECIMAL sul DB    import java.math.BigDecimal;
     @ColumnDefault("4.99")
     @Column(name = "rental_rate", nullable=false)
-    private BigDecimal rental_rate;
+    private BigDecimal rentalRate;
 
     @Column(name = "length", nullable=false)
     private Integer length;
@@ -59,7 +59,7 @@ public class Film {
     //campo di tipo DECIMAL sul DB    import java.math.BigDecimal;
     @ColumnDefault("19.99")
     @Column(name = "replacement_cost", nullable=false)
-    private BigDecimal replacement_cost;
+    private BigDecimal replacementCost;
 
     //campo di tipo ENUM sul DB
     //@Enumerated(EnumType.ORDINAL) //value will be saved to the base as a number
@@ -85,7 +85,7 @@ System.err.println(d);
     //campo di tipo SET sul DB
     //javax.persistence.ElementCollection
     @ElementCollection
-    private Set<String> special_features = new HashSet();
+    private Set<String> specialFeatures = new HashSet();
 
 
 /*

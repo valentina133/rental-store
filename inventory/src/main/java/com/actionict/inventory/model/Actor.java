@@ -20,10 +20,10 @@ public class Actor {
     private Integer id;
 
     @Column(name = "first_name", length=45, nullable=false)
-    private String first_name;
+    private String firstName;
 
     @Column(name = "last_name", length=45, nullable=false)
-    private String last_name;
+    private String lastName;
 
     @UpdateTimestamp
     @Column(name = "last_update", nullable=false)
