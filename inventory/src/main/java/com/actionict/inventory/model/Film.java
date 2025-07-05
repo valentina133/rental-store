@@ -10,6 +10,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+
 @RequiredArgsConstructor
 
 @Data
@@ -19,10 +24,10 @@ public class Film {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "film_id")
+    @Column(name = "film_id", nullable=false)
     private Integer id;
 
-    @Column(name = "title", length=255)
+    @Column(name = "title", length=255, nullable=false)
     private String title;
 
     //campo di tipo TEXT sul DB
@@ -34,26 +39,31 @@ public class Film {
     private Integer release_year;
 
     //campo di tipo TINYINT sul DB
+    @ColumnDefault("NULL")
     @Column(name = "original_language_id")
     private Integer original_language_id;
 
     //campo di tipo TINYINT sul DB
-    @Column(name = "rental_duration")
+    @ColumnDefault("3")
+    @Column(name = "rental_duration", nullable=false)
     private Integer rental_duration;
 
     //campo di tipo DECIMAL sul DB    import java.math.BigDecimal;
-    @Column(name = "rental_rate")
+    @ColumnDefault("4.99")
+    @Column(name = "rental_rate", nullable=false)
     private BigDecimal rental_rate;
 
-    @Column(name = "length")
+    @Column(name = "length", nullable=false)
     private Integer length;
 
     //campo di tipo DECIMAL sul DB    import java.math.BigDecimal;
-    @Column(name = "replacement_cost")
+    @ColumnDefault("19.99")
+    @Column(name = "replacement_cost", nullable=false)
     private BigDecimal replacement_cost;
 
     //campo di tipo ENUM sul DB
     //@Enumerated(EnumType.ORDINAL) //value will be saved to the base as a number
+    @ColumnDefault("G")
     @Enumerated(EnumType.STRING)    //value will be saved to the base as a string
     @Column(name="rating")
     public Rating rating;
@@ -84,8 +94,12 @@ System.err.println(d);
     private Set<String> special_features; // Campo SET nel database, rappresentato come Set<String> in Java
     //private Set<String> special_features= new HashSet<>();
 */
-
-    @Column(name = "last_update")
+    //@CreatedDate   //usato in Spring Data
+    //@CreationTimestamp //this adds the default timestamp on save   //è presente solo in Hibernate e non Spring Data
+    //@UpdateTimestamp   //Updates the last modified date when an entity is updated.
+    //@Temporal(TemporalType.TIMESTAMP)
+    @UpdateTimestamp
+    @Column(name = "last_update", nullable=false)
     private LocalDateTime lastUpdate;
 
     @ManyToOne

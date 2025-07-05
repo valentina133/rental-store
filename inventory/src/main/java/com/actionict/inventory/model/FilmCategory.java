@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.UpdateTimestamp;
+
 @RequiredArgsConstructor
 
 @Data
@@ -16,7 +18,8 @@ public class FilmCategory {
     // @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    @Column(name = "last_update")
+    @UpdateTimestamp
+    @Column(name = "last_update", nullable=false)
     private LocalDateTime lastUpdate;
 
     @Id   //chiave composta

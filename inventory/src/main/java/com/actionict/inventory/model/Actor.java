@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.UpdateTimestamp;
+
 @RequiredArgsConstructor
 
 @Data
@@ -14,15 +16,16 @@ public class Actor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "actor_id")
+    @Column(name = "actor_id", nullable=false)
     private Integer id;
 
-    @Column(name = "first_name", length=45)
+    @Column(name = "first_name", length=45, nullable=false)
     private String first_name;
 
-    @Column(name = "last_name", length=45)
+    @Column(name = "last_name", length=45, nullable=false)
     private String last_name;
 
-    @Column(name = "last_update")
+    @UpdateTimestamp
+    @Column(name = "last_update", nullable=false)
     private LocalDateTime lastUpdate;
 }

@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.UpdateTimestamp;
+
 @RequiredArgsConstructor
 
 @Data
@@ -14,12 +16,13 @@ public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "category_id")
+    @Column(name = "category_id", nullable=false)
     private Integer id;
 
-    @Column(name = "name", length=25)
+    @Column(name = "name", length=25, nullable=false)
     private String name;
 
-    @Column(name = "last_update")
+    @UpdateTimestamp
+    @Column(name = "last_update", nullable=false)
     private LocalDateTime lastUpdate;
 }

@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.UpdateTimestamp;
+
 @RequiredArgsConstructor
 
 @Data
@@ -14,10 +16,11 @@ public class Inventory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "inventory_id")
+    @Column(name = "inventory_id", nullable=false)
     private Integer id;
 
-    @Column(name = "last_update")
+    @UpdateTimestamp
+    @Column(name = "last_update", nullable=false)
     private LocalDateTime lastUpdate;
 
     @ManyToOne
