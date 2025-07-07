@@ -66,6 +66,7 @@ public class Film {
     @ColumnDefault("G")
     @Enumerated(EnumType.STRING)    //value will be saved to the base as a string
     @Column(name="rating")
+    //public enum rating;
     public Rating rating;
 
     public enum Rating {

@@ -39,7 +39,7 @@ public class FilmController {
         BigDecimal rentalRate=film.getRentalRate();
         Integer length=film.getLength();
         BigDecimal replacementCost=film.getReplacementCost();
-        Enum rating=film.getRating();   //todo sistemare
+        Film.Rating rating=film.getRating();   //todo sistemare
         Set specialFeatures=film.getSpecialFeatures(); //todo sistemare
         filmService.inserisci(title, description, releaseYear, languageId, originalLanguageId, rentalDuration, rentalRate, length, replacementCost, rating, specialFeatures);
     }
@@ -58,7 +58,7 @@ public class FilmController {
         BigDecimal rentalRate=film.getRentalRate();
         Integer length=film.getLength();
         BigDecimal replacementCost=film.getReplacementCost();
-        Enum rating=film.getRating();   //todo sistemare
+        Film.Rating rating=film.getRating();   //todo sistemare
         Set specialFeatures=film.getSpecialFeatures();   //todo sistemare
         filmService.update(id, title, description, releaseYear, languageId, originalLanguageId, rentalDuration, rentalRate, length, replacementCost, rating, specialFeatures);
     }

@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -31,7 +32,7 @@ public class FilmService {
     }
 
     //Inserisci
-    public void inserisci(String title, String description, Integer ReleaseYear, Integer languageId, Integer originalLanguageId, Integer rentalDuration, BigDecimal rentalRate, Integer length, BigDecimal replacementCost, Enum rating, Set specialFeatures) {
+    public void inserisci(String title, String description, Integer ReleaseYear, Integer languageId, Integer originalLanguageId, Integer rentalDuration, BigDecimal rentalRate, Integer length, BigDecimal replacementCost, Film.Rating rating, Set specialFeatures) {
         Film film = new Film();
         film.setTitle(title);
         film.setDescription(description);
@@ -51,7 +52,7 @@ public class FilmService {
     }
 
     //Aggiorna
-    public void update(Integer id, String newTitle, String newDescription, Integer newReleaseYear, Integer newLanguageId, Integer newOriginalLanguageId, Integer newRentalDuration, BigDecimal newRentalRate, Integer newLength, BigDecimal newReplacementCost, Enum newRating, Set newSpecialFeatures) {
+    public void update(Integer id, String newTitle, String newDescription, Integer newReleaseYear, Integer newLanguageId, Integer newOriginalLanguageId, Integer newRentalDuration, BigDecimal newRentalRate, Integer newLength, BigDecimal newReplacementCost, Film.Rating newRating, Set newSpecialFeatures) {
         Optional<Film> film = filmRepository.findById(id);
         film.get().setTitle(newTitle);
         film.get().setDescription(newDescription);
@@ -66,7 +67,7 @@ public class FilmService {
         film.get().setLength(newLength);
         film.get().setReplacementCost(newReplacementCost);
         film.get().setRating(newRating);  //Enum TODO SISTEMARE
-        film.get().setSpecialFeatures(Set<String> newSpecialFeatures);   //SET TODO SISTEMARE
+        film.get().setSpecialFeatures(newSpecialFeatures);   //SET TODO SISTEMARE
         filmRepository.save(film.get());
     }
 
