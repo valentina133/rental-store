@@ -4,6 +4,7 @@ package com.actionict.inventory.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -20,7 +21,9 @@ import org.springframework.data.annotation.CreatedDate;
 @Data
 @Entity
 @Table(name = "film")
-public class Film {
+public class Film implements Serializable {
+//public class Film {
+    private static final long serialVersionUID = -3009157732242241606L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
