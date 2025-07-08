@@ -34,12 +34,14 @@ public class ImageService {
         return imageRepository.findAll();
     }
 
+    /*
     //Recupera tutte le immagini associate af uno specifico film
     //Trova Uno
     public Object findById(Integer id) {
 
         return imageRepository.findById(id);
     }
+    */
 
     //Elimina una immagine
     public void deleteById(Integer id) {

@@ -31,12 +31,18 @@ public class ImageController {
     @GetMapping
     public List<Image> getAllImages() {return imageService.findAll();}
 
+    /*
     //Recupera tutte le immagini associate af uno specifico film
     //trova uno
     @GetMapping("/{id}")
-    public Object getImages(@PathVariable Integer id){
+    public Object getImages(@PathVariable Integer filmId){
+        return imageService.findById(filmId);
+    }
+
+    //public Object getImages(@PathVariable Integer id){
         return imageService.findById(id);
     }
+    */
 
     //Elimina
     @DeleteMapping("/{id}")
@@ -52,9 +58,4 @@ public class ImageController {
         Integer viewingOrder=image.getViewingOrder();
         imageService.update(id, viewingOrder);
     }
-
-
-
-
-
 }
