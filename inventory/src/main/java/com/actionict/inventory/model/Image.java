@@ -20,6 +20,9 @@ public class Image {
     @Column(name = "image_id", nullable=false)
     private Integer id;
 
+    @Column(name = "description", length=255, nullable=false)
+    private String description;
+
     @Column(name = "image_id", nullable=false)
     private Integer viewingOrder;
 
