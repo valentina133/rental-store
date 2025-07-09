@@ -23,10 +23,10 @@ public class Image {
     @Column(name = "description", length=255, nullable=false)
     private String description;
 
-    @Column(name = "image_id", nullable=false)
+    @Column(name = "viewing_order", nullable=false)
     private Integer viewingOrder;
 
-    @Column(name = "name", length=255, nullable=false)
+    @Column(name = "pathImage", length=255, nullable=false)
     private String pathImage;
 
     @UpdateTimestamp
