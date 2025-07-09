@@ -25,7 +25,7 @@ public class ImageService {
         image.setPathImage(pathImage);
         Film film = new Film();  //Imp
         film.setId(filmId);//Imp
-        image.setFilm(film);//tImp
+        image.setFilm(film);//Imp
         imageRepository.save(image);
     }
 
