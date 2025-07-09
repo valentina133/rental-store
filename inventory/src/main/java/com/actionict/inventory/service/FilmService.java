@@ -37,10 +37,10 @@ public class FilmService {
         film.setTitle(title);
         film.setDescription(description);
         film.setReleaseYear(ReleaseYear);
-        //Language language = new Language();// ToDo   conferma
-        Language language = film.getLanguage();// ToDo   conferma
-        language.setId(languageId);  // ToDo   conferma
-        film.setLanguage(language);   // ToDo conferma
+        //Language language = new Language();// Imp
+        Language language = film.getLanguage();// Imp
+        language.setId(languageId);  // Imp
+        film.setLanguage(language);   // Imp
         film.setOriginalLanguageId(originalLanguageId);
         film.setRentalDuration(rentalDuration);
         film.setRentalRate(rentalRate);
@@ -57,10 +57,10 @@ public class FilmService {
         film.get().setTitle(newTitle);
         film.get().setDescription(newDescription);
         film.get().setReleaseYear(newReleaseYear);
-        //Language language = new Language();// ToDo   conferma
-        Language languageOggetto = film.get().getLanguage();// ToDo   conferma
-        languageOggetto.setId(newLanguageId);  // ToDo   conferma
-        film.get().setLanguage(languageOggetto);   // ToDo conferma
+        //Language language = new Language();// Imp
+        Language languageOggetto = film.get().getLanguage();// Imp
+        languageOggetto.setId(newLanguageId);  // Imp
+        film.get().setLanguage(languageOggetto);   // Imp
         film.get().setOriginalLanguageId(newOriginalLanguageId);
         film.get().setRentalDuration(newRentalDuration);
         film.get().setRentalRate(newRentalRate);

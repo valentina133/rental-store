@@ -23,9 +23,9 @@ public class ImageService {
         image.setDescription(description);
         image.setViewingOrder(viewerOrder);
         image.setPathImage(pathImage);
-        Film film = new Film();  //todo confermare
-        film.setId(filmId);//todo confermare
-        image.setFilm(film);//todo confermare
+        Film film = new Film();  //Imp
+        film.setId(filmId);//Imp
+        image.setFilm(film);//tImp
         imageRepository.save(image);
     }
 

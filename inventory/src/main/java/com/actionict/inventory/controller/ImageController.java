@@ -22,8 +22,8 @@ public class ImageController {
         String description=image.getDescription();
         Integer viewingOrder=image.getViewingOrder();
         String pathImage=image.getPathImage();
-        Film film = image.getFilm();  //todo confermare
-        Integer filmId=film.getId();  //todo confermare
+        Film film = image.getFilm();  //Imp
+        Integer filmId=film.getId();  //Imp
         imageService.inserisci(description, viewingOrder, pathImage, filmId);
     }
 
