@@ -19,10 +19,11 @@ public class AddressService {
     }
 
     //Trova Uno
-    public Object findById(Integer id) {
+    public Address findById(Integer id) {
 
         Optional<Address> byId = addressRepository.findById(id);
-        return byId;
+        Address address = byId.get();
+        return address;
     }
 
     //Inserisci

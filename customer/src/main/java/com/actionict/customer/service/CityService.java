@@ -1,5 +1,6 @@
 package com.actionict.customer.service;
 
+import com.actionict.customer.model.Address;
 import com.actionict.customer.model.City;
 import com.actionict.customer.model.Country;
 import com.actionict.customer.repository.CityRepository;
@@ -19,9 +20,10 @@ public class CityService {
     }
 
     //Trova Uno
-    public Object findById(Integer id) {
-
-        return cityRepository.findById(id);
+    public City findById(Integer id) {
+        Optional<City> byId = cityRepository.findById(id);
+        City city = byId.get();
+        return city;
     }
 
     //Inserisci

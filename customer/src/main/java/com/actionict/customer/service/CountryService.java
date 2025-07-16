@@ -1,5 +1,6 @@
 package com.actionict.customer.service;
 
+import com.actionict.customer.model.City;
 import com.actionict.customer.model.Country;
 import com.actionict.customer.repository.CountryRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,9 +20,10 @@ public class CountryService {
     }
 
     //Trova Uno
-    public Object findById(Integer id) {
-
-        return countryRepository.findById(id);
+    public Country findById(Integer id) {
+        Optional<Country> byId = countryRepository.findById(id);
+        Country country = byId.get();
+        return country;
     }
 
     //Inserisci

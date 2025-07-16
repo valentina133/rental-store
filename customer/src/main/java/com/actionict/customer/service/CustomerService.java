@@ -1,6 +1,7 @@
 package com.actionict.customer.service;
 
 import com.actionict.customer.model.Address;
+import com.actionict.customer.model.City;
 import com.actionict.customer.model.Customer;
 import com.actionict.customer.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,8 +25,9 @@ public class CustomerService {
 
     //Trova Uno
     public Object findById(Integer id) {
-
-        return customerRepository.findById(id);
+        Optional<Customer> byId = customerRepository.findById(id);
+        Customer customer = byId.get();
+        return customer;
     }
 
     //Inserisci
