@@ -1,4 +1,3 @@
-//package com.actionict.customer;
 package com.actionict.inventory;
 
 import org.springframework.boot.SpringApplication;
