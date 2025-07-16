@@ -6,7 +6,6 @@ import com.actionict.inventory.repository.FilmRepository;
 import com.actionict.inventory.repository.LanguageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.List;
@@ -26,9 +25,10 @@ public class FilmService {
     }
 
     //Trova Uno
-    public Object findById(Integer id) {
-
-        return filmRepository.findById(id);
+    public Film findById(Integer id) {
+        Optional<Film> byId = filmRepository.findById(id);
+        Film film = byId.get();
+        return film;
     }
 
     //Inserisci
@@ -37,7 +37,7 @@ public class FilmService {
         film.setTitle(title);
         film.setDescription(description);
         film.setReleaseYear(ReleaseYear);
-        //Language language = new Language();// Imp
+        //Language language = new Language();// Imp  Quale delle due soluzioni?
         Language language = film.getLanguage();// Imp
         language.setId(languageId);  // Imp
         film.setLanguage(language);   // Imp
@@ -57,7 +57,7 @@ public class FilmService {
         film.get().setTitle(newTitle);
         film.get().setDescription(newDescription);
         film.get().setReleaseYear(newReleaseYear);
-        //Language language = new Language();// Imp
+        //Language language = new Language();// Imp  Quale delle due soluzioni?
         Language languageOggetto = film.get().getLanguage();// Imp
         languageOggetto.setId(newLanguageId);  // Imp
         film.get().setLanguage(languageOggetto);   // Imp

@@ -4,7 +4,6 @@ import com.actionict.inventory.model.Actor;
 import com.actionict.inventory.repository.ActorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -20,9 +19,10 @@ public class ActorService {
     }
 
     //Trova Uno
-    public Object findById(Integer id) {
-
-        return actorRepository.findById(id);
+    public Actor findById(Integer id) {
+        Optional<Actor> byId = actorRepository.findById(id);
+        Actor actor = byId.get();
+        return actor;
     }
 
     //Inserisci

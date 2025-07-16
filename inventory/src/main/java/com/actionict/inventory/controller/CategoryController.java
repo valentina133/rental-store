@@ -4,7 +4,6 @@ import com.actionict.inventory.model.Category;
 import com.actionict.inventory.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -19,7 +18,7 @@ public class CategoryController {
 
     //trova uno
     @GetMapping("/{id}")
-    public Object getCategories(@PathVariable Integer id){
+    public Category getCategory(@PathVariable Integer id){
         return categoryService.findById(id);
     }
 
@@ -43,7 +42,4 @@ public class CategoryController {
     public void deleteCategory(@PathVariable Integer id){
         categoryService.deleteById(id);
     }
-
-
-
 }

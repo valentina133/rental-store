@@ -24,7 +24,7 @@ public class CustomerService {
     }
 
     //Trova Uno
-    public Object findById(Integer id) {
+    public Customer findById(Integer id) {
         Optional<Customer> byId = customerRepository.findById(id);
         Customer customer = byId.get();
         return customer;

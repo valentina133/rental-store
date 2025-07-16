@@ -4,7 +4,6 @@ import com.actionict.inventory.model.Actor;
 import com.actionict.inventory.service.ActorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -19,7 +18,7 @@ public class ActorController {
 
     //trova uno
     @GetMapping("/{id}")
-    public Object getActors(@PathVariable Integer id){
+    public Actor getActor(@PathVariable Integer id){
         return actorService.findById(id);
     }
 

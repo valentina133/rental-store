@@ -3,9 +3,7 @@ package com.actionict.customer.model;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDateTime;
-import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 @Data
 @Entity
 @Table(name = "address")

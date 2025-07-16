@@ -4,7 +4,6 @@ import com.actionict.inventory.model.Language;
 import com.actionict.inventory.service.LanguageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -19,7 +18,7 @@ public class LanguageController {
 
     //trova uno
     @GetMapping("/{id}")
-    public Object getCategories(@PathVariable Integer id){
+    public Language getLanguage(@PathVariable Integer id){
         return languageService.findById(id);
     }
 
@@ -43,7 +42,4 @@ public class LanguageController {
     public void deleteLanguage(@PathVariable Integer id){
         languageService.deleteById(id);
     }
-
-
-
 }

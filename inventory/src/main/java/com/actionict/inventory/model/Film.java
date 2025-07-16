@@ -1,32 +1,23 @@
-//package com.actionict.customer.model;
 package com.actionict.inventory.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
-
-import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.CreatedDate;
-
-@RequiredArgsConstructor
 
 @Data
 @Entity
 @Table(name = "film")
 public class Film implements Serializable {
-//public class Film {
-    //private static final long serialVersionUID = -3009157732242241606L;
-@Serial
-private static final long serialVersionUID = 1L;
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,7 +53,7 @@ private static final long serialVersionUID = 1L;
     @Column(name = "length", nullable=false)
     private Integer length;
 
-    //campo di tipo DECIMAL sul DB    import java.math.BigDecimal;
+    //campo di tipo DECIMAL sul DB
     @ColumnDefault("19.99")
     @Column(name = "replacement_cost", nullable=false)
     private BigDecimal replacementCost;

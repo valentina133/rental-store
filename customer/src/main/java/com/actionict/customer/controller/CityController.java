@@ -25,14 +25,13 @@ public class CityController {
 
     //trova uno
     @GetMapping("/{id}")
-    public Object getCity(@PathVariable Integer id){
+    public City getCity(@PathVariable Integer id){
         return cityService.findById(id);
     }
 
     //inserisci
     @PostMapping
     public void addCity(@RequestBody City city) {
-        //Integer id=city.getId();
         String name= city.getName();
         Country country=city. getCountry();
         Integer id=country.getId();

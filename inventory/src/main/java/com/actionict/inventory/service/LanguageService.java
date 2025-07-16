@@ -4,7 +4,6 @@ import com.actionict.inventory.model.Language;
 import com.actionict.inventory.repository.LanguageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -20,9 +19,10 @@ public class LanguageService {
     }
 
     //Trova Uno
-    public Object findById(Integer id) {
-
-        return languageRepository.findById(id);
+    public Language findById(Integer id) {
+        Optional<Language> byId = languageRepository.findById(id);
+        Language language = byId.get();
+        return language;
     }
 
     //Inserisci

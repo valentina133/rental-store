@@ -1,14 +1,9 @@
-//package com.actionict.customer.model;
 package com.actionict.inventory.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.UpdateTimestamp;
-
 import java.time.LocalDateTime;
-
-@RequiredArgsConstructor
 
 @Data
 @Entity

@@ -5,7 +5,6 @@ import com.actionict.inventory.model.Image;
 import com.actionict.inventory.repository.ImageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +16,6 @@ public class ImageService {
     private final ImageRepository imageRepository;
 
     //Inserisci/carica immagine
-    //inserisci
     public void inserisci(String description, Integer viewerOrder, String pathImage, Integer filmId) {
         Image image = new Image();
         image.setDescription(description);
@@ -34,22 +32,12 @@ public class ImageService {
         return imageRepository.findAll();
     }
 
-    /*
-    //Recupera tutte le immagini associate af uno specifico film
-    //Trova Uno
-    public Object findById(Integer id) {
-
-        return imageRepository.findById(id);
-    }
-    */
-
     //Elimina una immagine
     public void deleteById(Integer id) {
         imageRepository.deleteById(id);
     }
 
-    //Modifica ordine immagini
-    //Aggiorna
+    //Aggiorna/Modifica ordine immagini
     public void update(Integer id, Integer newViewingOrder) {
         Optional<Image> image = imageRepository.findById(id);
         image.get().setViewingOrder(newViewingOrder);

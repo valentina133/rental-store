@@ -1,10 +1,8 @@
 package com.actionict.inventory.service;
-
 import com.actionict.inventory.model.Category;
 import com.actionict.inventory.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -20,9 +18,10 @@ public class CategoryService {
     }
 
     //Trova Uno
-    public Object findById(Integer id) {
-
-        return categoryRepository.findById(id);
+    public Category findById(Integer id) {
+        Optional<Category> byId = categoryRepository.findById(id);
+        Category category = byId.get();
+        return category;
     }
 
     //Inserisci

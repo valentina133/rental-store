@@ -1,22 +1,15 @@
-//package com.actionict.customer.model;
 package com.actionict.inventory.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDateTime;
-import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.UpdateTimestamp;
-
-@RequiredArgsConstructor
 
 @Data
 @Entity
 @Table(name = "film_category")
 @IdClass(FilmCategoryChiaveComposta.class)
 public class FilmCategory {
-
-    // @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
 
     @UpdateTimestamp
     @Column(name = "last_update", nullable=false)

@@ -5,7 +5,6 @@ import com.actionict.inventory.model.Language;
 import com.actionict.inventory.service.FilmService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
@@ -22,7 +21,7 @@ public class FilmController {
 
     //trova uno
     @GetMapping("/{id}")
-    public Object getFilms(@PathVariable Integer id){
+    public Film getFilm(@PathVariable Integer id){
         return filmService.findById(id);
     }
 
