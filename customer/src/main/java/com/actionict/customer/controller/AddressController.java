@@ -1,7 +1,6 @@
 package com.actionict.customer.controller;
 
 import com.actionict.customer.model.Address;
-import com.actionict.customer.model.City;
 import com.actionict.customer.service.AddressService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,27 +31,13 @@ public class AddressController {
     //inserisci
     @PostMapping
     public void addAddress(@RequestBody Address address) {
-        //Integer id=address.getId();
-        String addressParametro= address.getAddress();
-        String address2= address.getAddress2();
-        String district= address.getDistrict();
-        String postalCode= address.getPostalCode();
-        String phone= address.getPhone();
-        City city=address.getCity();
-        Integer id=city.getId();
-        addressService.inserisci(addressParametro, address2, district, postalCode, phone, id);
+        addressService.inserisci(address);
     }
 
     //aggiorna
-    @PutMapping
-    public void updateAddress(@RequestBody Address address){
-        Integer id= address.getId();
-        String addressParametro=address.getAddress();
-        String address2=address.getAddress2();
-        String district=address.getDistrict();
-        String postalCode=address.getPostalCode();
-        String phone=address.getPhone();
-        addressService.update(id, addressParametro, address2, district, postalCode, phone);
+    @PutMapping("/{id}")
+    public void updateAddress(@PathVariable Integer id, @RequestBody Address address){
+        addressService.update(id, address);
     }
 
 

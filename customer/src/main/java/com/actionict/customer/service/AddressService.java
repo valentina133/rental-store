@@ -1,7 +1,6 @@
 package com.actionict.customer.service;
 
 import com.actionict.customer.model.Address;
-import com.actionict.customer.model.City;
 import com.actionict.customer.repository.AddressRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,28 +26,29 @@ public class AddressService {
     }
 
     //Inserisci
-    public void inserisci(String address, String address2, String district, String postalCode, String phone, Integer id) {
-        Address addressOfInsert=new Address();
-        addressOfInsert.setAddress(address);
-        addressOfInsert.setAddress2(address2);
-        addressOfInsert.setDistrict(district);
-        addressOfInsert.setPostalCode(postalCode);
-        addressOfInsert.setPhone(phone);
-        City city = new City();
-        city.setId(id);
-        addressOfInsert.setCity(city);
-        addressRepository.save(addressOfInsert);
+    public void inserisci(Address address) {
+        addressRepository.save(address);
     }
 
     //Aggiorna
-    public void update(Integer id, String newAddress, String newAddress2, String newDistrict, String newPostalCode, String newPhone) {
-        Optional<Address> address = addressRepository.findById(id);
-        address.get().setAddress(newAddress);
-        address.get().setAddress2(newAddress2);
-        address.get().setDistrict(newDistrict);
-        address.get().setPostalCode(newPostalCode);
-        address.get().setPhone(newPhone);
-        addressRepository.save(address.get());
+    public void update(Integer id, Address address) {
+        Optional<Address> addressOpt = addressRepository.findById(id);
+        String newAddress=address.getAddress();
+        String newAddress2=address.getAddress2();
+        String newDistrict=address.getDistrict();
+        String newPostalCode=address.getPostalCode();
+        String newPhone=address.getPhone();
+        //City city=address.getCity();
+        //Integer newCityId=city.getId();
+        addressOpt.get().setAddress(newAddress);
+        addressOpt.get().setAddress2(newAddress2);
+        addressOpt.get().setDistrict(newDistrict);
+        addressOpt.get().setPostalCode(newPostalCode);
+        addressOpt.get().setPhone(newPhone);
+        //City cityByOpt=addressOpt.get().getCity();
+        //cityByOpt.setId(newCityId);
+        //addressOpt.get().setCity(cityByOpt);
+        addressRepository.save(addressOpt.get());
     }
 
     //Elimina

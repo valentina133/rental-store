@@ -1,6 +1,5 @@
 package com.actionict.customer.service;
 
-import com.actionict.customer.model.City;
 import com.actionict.customer.model.Country;
 import com.actionict.customer.repository.CountryRepository;
 import lombok.RequiredArgsConstructor;
@@ -27,17 +26,16 @@ public class CountryService {
     }
 
     //Inserisci
-    public void inserisci(String name) {
-        Country country = new Country();
-        country.setName(name);
+    public void inserisci(Country country) {
         countryRepository.save(country);
     }
 
     //Aggiorna
-    public void update(Integer id, String newName) {
-        Optional<Country> country = countryRepository.findById(id);
-        country.get().setName(newName);
-        countryRepository.save(country.get());
+    public void update(Integer id, Country country) {
+        Optional<Country> countryOpt = countryRepository.findById(id);
+        String newName=country.getName();
+        countryOpt.get().setName(newName);
+        countryRepository.save(countryOpt.get());
     }
 
     //Elimina

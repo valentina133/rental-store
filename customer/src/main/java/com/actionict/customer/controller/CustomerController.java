@@ -1,6 +1,5 @@
 package com.actionict.customer.controller;
 
-import com.actionict.customer.model.Address;
 import com.actionict.customer.model.Customer;
 import com.actionict.customer.service.CustomerService;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 @RestController
 @RequestMapping("/customers")
@@ -33,26 +31,13 @@ public class CustomerController {
     //inserisci
     @PostMapping
     public void addCustomer(@RequestBody Customer customer) {
-        String firstName=customer.getFirstName();
-        String lastName=customer.getLastName();
-        String email=customer.getEmail();
-        Boolean active=customer.getActive();
-        LocalDateTime createData=customer.getCreateDate();
-        Address address=customer.getAddress();
-        Integer id=address.getId();
-        customerService.inserisci(firstName, lastName, email, active, createData, id);
+        customerService.inserisci(customer);
     }
 
     //aggiorna
-    @PutMapping
-    public void updateCustomer(@RequestBody Customer customer){
-        Integer id=customer.getId();
-        String firstName=customer.getFirstName();
-        String lastName=customer.getLastName();
-        String email=customer.getEmail();
-        Boolean active=customer.getActive();
-        LocalDateTime createData=customer.getCreateDate();
-        customerService.update(id, firstName, lastName, email, active, createData);
+    @PutMapping("/{id}")
+    public void updateCustomer(@PathVariable Integer id, @RequestBody Customer customer){
+        customerService.update(id, customer);
     }
 
     //Elimina

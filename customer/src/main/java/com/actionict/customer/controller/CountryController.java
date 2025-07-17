@@ -25,16 +25,13 @@ public class CountryController {
     //inserisci
     @PostMapping
     public void addCountry(@RequestBody Country country) {
-        String name=country.getName();
-        countryService.inserisci(name);
+        countryService.inserisci(country);
     }
 
     //aggiorna
-    @PutMapping
-    public void updateCountry(@RequestBody Country country){
-        Integer id=country.getId();
-        String name=country.getName();
-        countryService.update(id, name);
+    @PutMapping("/{id}")
+    public void updateCountry(@PathVariable Integer id, @RequestBody Country country){
+        countryService.update(id, country);
     }
 
     //Elimina
@@ -42,7 +39,4 @@ public class CountryController {
     public void deleteCountry(@PathVariable Integer id){
         countryService.deleteById(id);
     }
-
-
-
 }

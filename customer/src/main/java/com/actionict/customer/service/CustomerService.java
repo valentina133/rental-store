@@ -1,7 +1,6 @@
 package com.actionict.customer.service;
 
 import com.actionict.customer.model.Address;
-import com.actionict.customer.model.City;
 import com.actionict.customer.model.Customer;
 import com.actionict.customer.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,28 +30,29 @@ public class CustomerService {
     }
 
     //Inserisci
-    public void inserisci(String firstName, String lastName, String email, Boolean active, LocalDateTime createData, Integer id) {
-        Customer customer = new Customer();
-        customer.setFirstName(firstName);
-        customer.setLastName(lastName);
-        customer.setEmail(email);
-        customer.setActive(active);
-        customer.setCreateDate(createData);
-        Address address = new Address();
-        address.setId(id);
-        customer.setAddress(address);
+    public void inserisci(Customer customer) {
         customerRepository.save(customer);
     }
 
     //Aggiorna
-    public void update(Integer id, String newFirstName, String newLastName, String newEmail, Boolean newActive, LocalDateTime newCreateDate) {
-        Optional<Customer> customer = customerRepository.findById(id);
-        customer.get().setFirstName(newFirstName);
-        customer.get().setLastName(newLastName);
-        customer.get().setEmail(newEmail);
-        customer.get().setActive(newActive);
-        customer.get().setCreateDate(newCreateDate);
-        customerRepository.save(customer.get());
+    public void update(Integer id, Customer customer) {
+        Optional<Customer> customerOpt = customerRepository.findById(id);
+        String newFirstName=customer.getFirstName();
+        String newLastName=customer.getLastName();
+        String newEmail=customer.getEmail();
+        Boolean newActive=customer.getActive();
+        LocalDateTime newCreateDate=customer.getCreateDate();
+        //Address address=customer.getAddress();
+        //Integer newAddressId=address.getId();
+        customerOpt.get().setFirstName(newFirstName);
+        customerOpt.get().setLastName(newLastName);
+        customerOpt.get().setEmail(newEmail);
+        customerOpt.get().setActive(newActive);
+        customerOpt.get().setCreateDate(newCreateDate);
+        //Address addressByOpt=customerOpt.get().getAddress();
+        //addressByOpt.setId(newAddressId);
+        //customerOpt.get().setAddress(addressByOpt);
+        customerRepository.save(customerOpt.get());
     }
 
     //Elimina
