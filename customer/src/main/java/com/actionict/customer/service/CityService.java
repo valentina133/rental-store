@@ -33,9 +33,9 @@ public class CityService {
     public void update(Integer id, City city) {
         Optional <City> cityOpt = cityRepository.findById(id);
         String newName=city.getName();
+        cityOpt.get().setName(newName);
         //Country country= city.getCountry();
         //Integer newCountryId=country.getId();
-        //cityOpt.get().setName(newName);
         //Country countryByOpt=cityOpt.get().getCountry();
         //countryByOpt.setId(newCountryId);
         //cityOpt.get().setCountry(countryByOpt);

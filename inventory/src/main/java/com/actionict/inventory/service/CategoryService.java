@@ -1,6 +1,9 @@
 package com.actionict.inventory.service;
+
+import com.actionict.inventory.model.Actor;
 import com.actionict.inventory.model.Category;
 import com.actionict.inventory.repository.CategoryRepository;
+import com.actionict.inventory.request.CategoryRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -25,17 +28,19 @@ public class CategoryService {
     }
 
     //Inserisci
-    public void inserisci(String name) {
-        Category country = new Category();
-        country.setName(name);
-        categoryRepository.save(country);
+    public void inserisci(CategoryRequest categoryRequest) {
+        String name=categoryRequest.getName();
+        Category category = new Category();
+        category.setName(name);
+        categoryRepository.save(category);
     }
 
     //Aggiorna
-    public void update(Integer id, String newName) {
-        Optional<Category> country = categoryRepository.findById(id);
-        country.get().setName(newName);
-        categoryRepository.save(country.get());
+    public void update(Integer id, CategoryRequest categoryRequest) {
+        Optional<Category> categoryOpt = categoryRepository.findById(id);
+        String newName=categoryRequest.getName();
+        categoryOpt.get().setName(newName);
+        categoryRepository.save(categoryOpt.get());
     }
 
     //Elimina

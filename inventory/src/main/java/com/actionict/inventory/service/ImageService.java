@@ -1,8 +1,10 @@
 package com.actionict.inventory.service;
 
+import com.actionict.inventory.model.Actor;
 import com.actionict.inventory.model.Film;
 import com.actionict.inventory.model.Image;
 import com.actionict.inventory.repository.ImageRepository;
+import com.actionict.inventory.request.ImageRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -16,7 +18,13 @@ public class ImageService {
     private final ImageRepository imageRepository;
 
     //Inserisci/carica immagine
-    public void inserisci(String description, Integer viewerOrder, String pathImage, Integer filmId) {
+    public void inserisci(ImageRequest imageRequest) {
+        String description=imageRequest.getDescription();
+        Integer viewerOrder=imageRequest.getViewingOrder();
+        String pathImage=imageRequest.getPathImage();
+        Film filmByImageRequest=imageRequest.getFilm();   //IMP
+        Integer filmId=filmByImageRequest.getId();   //IMP
+
         Image image = new Image();
         image.setDescription(description);
         image.setViewingOrder(viewerOrder);
@@ -38,9 +46,10 @@ public class ImageService {
     }
 
     //Aggiorna/Modifica ordine immagini
-    public void update(Integer id, Integer newViewingOrder) {
-        Optional<Image> image = imageRepository.findById(id);
-        image.get().setViewingOrder(newViewingOrder);
-        imageRepository.save(image.get());
+    public void update(Integer id, ImageRequest imageRequest) {
+        Optional<Image> imageOpt = imageRepository.findById(id);
+        Integer newViewingOrder=imageRequest.getViewingOrder();
+        imageOpt.get().setViewingOrder(newViewingOrder);
+        imageRepository.save(imageOpt.get());
     }
 }

@@ -1,6 +1,7 @@
 package com.actionict.inventory.controller;
 
 import com.actionict.inventory.model.Language;
+import com.actionict.inventory.request.LanguageRequest;
 import com.actionict.inventory.service.LanguageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -24,17 +25,14 @@ public class LanguageController {
 
     //inserisci
     @PostMapping
-    public void addLanguage(@RequestBody Language language) {
-        String name=language.getName();
-        languageService.inserisci(name);
+    public void addLanguage(@RequestBody LanguageRequest languageRequest) {
+        languageService.inserisci(languageRequest);
     }
 
     //aggiorna
-    @PutMapping
-    public void updateLanguage(@RequestBody Language language){
-        Integer id=language.getId();
-        String name=language.getName();
-        languageService.update(id, name);
+    @PutMapping("/{id}")
+    public void updateLanguage(@PathVariable Integer id, @RequestBody LanguageRequest languageRequest){
+        languageService.update(id, languageRequest);
     }
 
     //Elimina

@@ -1,7 +1,9 @@
 package com.actionict.inventory.service;
 
+import com.actionict.inventory.model.Actor;
 import com.actionict.inventory.model.Language;
 import com.actionict.inventory.repository.LanguageRepository;
+import com.actionict.inventory.request.LanguageRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -26,17 +28,19 @@ public class LanguageService {
     }
 
     //Inserisci
-    public void inserisci(String name) {
+    public void inserisci(LanguageRequest languageRequest) {
+        String name=languageRequest.getName();
         Language language = new Language();
         language.setName(name);
         languageRepository.save(language);
     }
 
     //Aggiorna
-    public void update(Integer id, String newName) {
-        Optional<Language> language = languageRepository.findById(id);
-        language.get().setName(newName);
-        languageRepository.save(language.get());
+    public void update(Integer id, LanguageRequest languageRequest) {
+        Optional<Language> languageOpt = languageRepository.findById(id);
+        String newName=languageRequest.getName();
+        languageOpt.get().setName(newName);
+        languageRepository.save(languageOpt.get());
     }
 
     //Elimina

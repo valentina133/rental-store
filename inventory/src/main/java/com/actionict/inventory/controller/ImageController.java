@@ -2,6 +2,7 @@ package com.actionict.inventory.controller;
 
 import com.actionict.inventory.model.Film;
 import com.actionict.inventory.model.Image;
+import com.actionict.inventory.request.ImageRequest;
 import com.actionict.inventory.service.ImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -14,15 +15,16 @@ public class ImageController {
 
     private final ImageService imageService;
 
-    //Inserisci/carica immagine
+    //carica immagine
+    //Inserisci
     @PostMapping
-    public void addImage(@RequestBody Image image) {
-        String description=image.getDescription();
+    public void addImage(@RequestBody ImageRequest imageRequest) {
+        /*String description=image.getDescription();
         Integer viewingOrder=image.getViewingOrder();
         String pathImage=image.getPathImage();
         Film film = image.getFilm();  //Imp
-        Integer filmId=film.getId();  //Imp
-        imageService.inserisci(description, viewingOrder, pathImage, filmId);
+        Integer filmId=film.getId();  //Imp  */
+        imageService.inserisci(imageRequest);
     }
 
     //Recupera tutte le immagini sul db
@@ -35,11 +37,10 @@ public class ImageController {
         imageService.deleteById(id);
     }
 
-    //aggiorna/modifica ordine immagini
-    @PutMapping
-    public void updateImage(@RequestBody Image image){
-        Integer id=image.getId();
-        Integer viewingOrder=image.getViewingOrder();
-        imageService.update(id, viewingOrder);
+    //modifica ordine immagini
+    //aggiorna
+    @PutMapping("/{id}")
+    public void updateImage(@PathVariable Integer id, @RequestBody ImageRequest imageRequest){
+        imageService.update(id, imageRequest);
     }
 }

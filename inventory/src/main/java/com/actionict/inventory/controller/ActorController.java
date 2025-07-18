@@ -1,6 +1,7 @@
 package com.actionict.inventory.controller;
 
 import com.actionict.inventory.model.Actor;
+import com.actionict.inventory.request.ActorRequest;
 import com.actionict.inventory.service.ActorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -24,19 +25,15 @@ public class ActorController {
 
     //inserisci
     @PostMapping
-    public void addActor(@RequestBody Actor actor) {
-        String firstName=actor.getFirstName();
-        String lastName=actor.getLastName();
-        actorService.inserisci(firstName, lastName);
+    public void addActor(@RequestBody ActorRequest actorRequest) {
+        actorService.inserisci(actorRequest);
     }
 
     //aggiorna
-    @PutMapping
-    public void updateActor(@RequestBody Actor actor){
-        Integer id=actor.getId();
-        String firstName=actor.getFirstName();
-        String lastName=actor.getLastName();
-        actorService.update(id, firstName, lastName);
+    @PutMapping("/{id}")
+    public void updateActor(@PathVariable Integer id, @RequestBody ActorRequest actorRequest){
+
+        actorService.update(id, actorRequest);
     }
 
     //Elimina
