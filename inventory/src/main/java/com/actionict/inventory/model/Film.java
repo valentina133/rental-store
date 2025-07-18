@@ -63,15 +63,7 @@ public class Film implements Serializable {
     @ColumnDefault("G")
     @Enumerated(EnumType.STRING)    //value will be saved to the base as a string
     @Column(name="rating")
-    public Rating rating;
-
-    public enum Rating {
-        G,
-        PG,
-        PG13,   // sul db è PG-13 ma qui dà errore allora metto PG13
-        R,
-        NC17       //sul db è NC-17 ma qui dà errore allora metto NC17
-    }
+    public EnumRating.Rating rating;
 
     /*
     for( Giorno d : Giorno.values() ) {
@@ -80,9 +72,13 @@ System.err.println(d);
      */
 
     //campo di tipo SET sul DB
+    String specialFeatures="Trailers, Commentaries, Deleted Scenes, Behind the Scenes";
+
+
     //javax.persistence.ElementCollection
-    @ElementCollection
+    /*@ElementCollection
     private Set<String> specialFeatures = new HashSet();
+    */
 
 
 /*

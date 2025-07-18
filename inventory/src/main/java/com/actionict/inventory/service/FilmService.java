@@ -1,6 +1,6 @@
 package com.actionict.inventory.service;
 
-import com.actionict.inventory.model.Actor;
+import com.actionict.inventory.model.EnumRating;
 import com.actionict.inventory.model.Film;
 import com.actionict.inventory.model.Language;
 import com.actionict.inventory.repository.FilmRepository;
@@ -9,7 +9,6 @@ import com.actionict.inventory.request.FilmRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -45,7 +44,7 @@ public class FilmService {
         BigDecimal rentalRate=filmRequest.getRentalRate();
         Integer length=filmRequest.getLength();
         BigDecimal replacementCost=filmRequest.getReplacementCost();
-        Film.Rating rating=filmRequest.getRating();    //TODO SISTEMARE ENUM
+        EnumRating.Rating rating=filmRequest.getRating();   //IMP todo ENUM
         Set specialFeatures=filmRequest.getSpecialFeatures();   //TODO SISTEMARE  SET
 
         Film film = new Film();
@@ -61,7 +60,7 @@ public class FilmService {
         film.setLength(length);
         film.setReplacementCost(replacementCost);
         film.setRating(rating);   //ENUM     ToDo SISTEMARE
-        film.setSpecialFeatures(specialFeatures);   //SET    ToDo SISTEMARE
+        film.setSpecialFeatures(specialFeatures);   //SET    TODO SISTEMARE
         filmRepository.save(film);
     }
 
@@ -75,7 +74,7 @@ public class FilmService {
         BigDecimal newRentalRate=filmRequest.getRentalRate();
         Integer newLength=filmRequest.getLength();
         BigDecimal newReplacementCost=filmRequest.getReplacementCost();
-        Film.Rating newRating=filmRequest.getRating();   //Enum TODO SISTEMARE
+        EnumRating.Rating newRating=filmRequest.getRating();   //Enum TODO SISTEMARE
         Set newSpecialFeatures=filmRequest.getSpecialFeatures();  ///SET TODO SISTEMARE
 
         filmOpt.get().setTitle(newTitle);
@@ -85,7 +84,7 @@ public class FilmService {
         filmOpt.get().setRentalRate(newRentalRate);
         filmOpt.get().setLength(newLength);
         filmOpt.get().setReplacementCost(newReplacementCost);
-        filmOpt.get().setRating(newRating);  //Enum TODO SISTEMARE
+        filmOpt.get().setRating(newRating);  //IMP TODO ENUM
         filmOpt.get().setSpecialFeatures(newSpecialFeatures);   //SET TODO SISTEMARE
         filmRepository.save(filmOpt.get());
     }
