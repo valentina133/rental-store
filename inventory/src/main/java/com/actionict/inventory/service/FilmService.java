@@ -9,9 +9,7 @@ import com.actionict.inventory.request.FilmRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -45,7 +43,13 @@ public class FilmService {
         Integer length=filmRequest.getLength();
         BigDecimal replacementCost=filmRequest.getReplacementCost();
         EnumRating.Rating rating=filmRequest.getRating();   //IMP todo ENUM
-        Set specialFeatures=filmRequest.getSpecialFeatures();   //TODO SISTEMARE  SET
+        //Set specialFeatures=filmRequest.getSpecialFeatures();   //TODO SISTEMARE  SET
+
+
+        String specialFeaturesString = "";   //TODO SISTEMARE  SET
+        String[] specialFeaturesArray = specialFeaturesString.split(",");
+        //List<String> specialFeatures = new ArrayList<>(Arrays.asList(specialFeaturesArray));
+        Set<String> specialFeatures = new HashSet<>(Arrays.asList(specialFeaturesArray));
 
         Film film = new Film();
         film.setTitle(title);
@@ -61,6 +65,12 @@ public class FilmService {
         film.setReplacementCost(replacementCost);
         film.setRating(rating);   //ENUM     ToDo SISTEMARE
         film.setSpecialFeatures(specialFeatures);   //SET    TODO SISTEMARE
+
+
+
+
+
+
         filmRepository.save(film);
     }
 
