@@ -1,13 +1,11 @@
 package com.actionict.inventory.service;
 
-import com.actionict.inventory.model.Actor;
 import com.actionict.inventory.model.Language;
 import com.actionict.inventory.repository.LanguageRepository;
 import com.actionict.inventory.request.LanguageRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -22,9 +20,7 @@ public class LanguageService {
 
     //Trova Uno
     public Language findById(Integer id) {
-        Optional<Language> byId = languageRepository.findById(id);
-        Language language = byId.get();
-        return language;
+        return languageRepository.findById(id).orElseThrow(() -> new RuntimeException("Lingua non trovata:"+id));
     }
 
     //Inserisci
@@ -37,10 +33,10 @@ public class LanguageService {
 
     //Aggiorna
     public void update(Integer id, LanguageRequest languageRequest) {
-        Optional<Language> languageOpt = languageRepository.findById(id);
+        Language languageByDB = languageRepository.findById(id).orElseThrow(() -> new RuntimeException("Lingua non trovato:"+id));
         String newName=languageRequest.getName();
-        languageOpt.get().setName(newName);
-        languageRepository.save(languageOpt.get());
+        languageByDB.setName(newName);
+        languageRepository.save(languageByDB);
     }
 
     //Elimina

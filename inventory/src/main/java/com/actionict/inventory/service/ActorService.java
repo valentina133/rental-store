@@ -6,7 +6,6 @@ import com.actionict.inventory.request.ActorRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,9 +20,7 @@ public class ActorService {
 
     //Trova Uno
     public Actor findById(Integer id) {
-        Optional<Actor> byId = actorRepository.findById(id);
-        Actor actor = byId.get();
-        return actor;
+        return actorRepository.findById(id).orElseThrow(() -> new RuntimeException("Attore non trovato:"+id));
     }
 
     //Inserisci
@@ -38,12 +35,12 @@ public class ActorService {
 
     //Aggiorna
     public void update(Integer id, ActorRequest actorRequest) {
-        Optional<Actor> actorOpt = actorRepository.findById(id);
+        Actor actorByDB = actorRepository.findById(id).orElseThrow(() -> new RuntimeException("Attore non trovato:"+id));
         String newFirstName=actorRequest.getFirstName();
         String newLastName=actorRequest.getLastName();
-        actorOpt.get().setFirstName(newFirstName);
-        actorOpt.get().setLastName(newLastName);
-        actorRepository.save(actorOpt.get());
+        actorByDB.setFirstName(newFirstName);
+        actorByDB.setLastName(newLastName);
+        actorRepository.save(actorByDB);
     }
 
     //Elimina

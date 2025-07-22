@@ -1,13 +1,11 @@
 package com.actionict.inventory.service;
 
-import com.actionict.inventory.model.Actor;
 import com.actionict.inventory.model.Category;
 import com.actionict.inventory.repository.CategoryRepository;
 import com.actionict.inventory.request.CategoryRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -22,9 +20,7 @@ public class CategoryService {
 
     //Trova Uno
     public Category findById(Integer id) {
-        Optional<Category> byId = categoryRepository.findById(id);
-        Category category = byId.get();
-        return category;
+        return categoryRepository.findById(id).orElseThrow(() -> new RuntimeException("Categoria non trovata:"+id));
     }
 
     //Inserisci
@@ -37,10 +33,10 @@ public class CategoryService {
 
     //Aggiorna
     public void update(Integer id, CategoryRequest categoryRequest) {
-        Optional<Category> categoryOpt = categoryRepository.findById(id);
+        Category categoryByDB = categoryRepository.findById(id).orElseThrow(() -> new RuntimeException("Categoria non trovata:"+id));
         String newName=categoryRequest.getName();
-        categoryOpt.get().setName(newName);
-        categoryRepository.save(categoryOpt.get());
+        categoryByDB.setName(newName);
+        categoryRepository.save(categoryByDB);
     }
 
     //Elimina

@@ -3,6 +3,7 @@ package com.actionict.inventory.controller;
 import com.actionict.inventory.model.Film;
 import com.actionict.inventory.model.Language;
 import com.actionict.inventory.request.FilmRequest;
+import com.actionict.inventory.responce.FilmResponce;
 import com.actionict.inventory.service.FilmService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ public class FilmController {
 
     //trova uno
     @GetMapping("/{id}")
-    public Film getFilm(@PathVariable Integer id){
+    public FilmResponce getFilm(@PathVariable Integer id){
         return filmService.findById(id);
     }
 

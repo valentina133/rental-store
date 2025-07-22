@@ -1,6 +1,5 @@
 package com.actionict.inventory.service;
 
-import com.actionict.inventory.model.Actor;
 import com.actionict.inventory.model.Film;
 import com.actionict.inventory.model.Image;
 import com.actionict.inventory.repository.ImageRepository;
@@ -8,7 +7,6 @@ import com.actionict.inventory.request.ImageRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -22,16 +20,17 @@ public class ImageService {
         String description=imageRequest.getDescription();
         Integer viewerOrder=imageRequest.getViewingOrder();
         String pathImage=imageRequest.getPathImage();
-        Film filmByImageRequest=imageRequest.getFilm();   //IMP
-        Integer filmId=filmByImageRequest.getId();   //IMP
+        Film filmByImageRequest=imageRequest.getFilm();   //chiave esterna
+        Integer filmId=filmByImageRequest.getId();   //chiave esterna
 
         Image image = new Image();
         image.setDescription(description);
         image.setViewingOrder(viewerOrder);
         image.setPathImage(pathImage);
-        Film film = new Film();  //Imp
-        film.setId(filmId);//Imp
-        image.setFilm(film);//Imp
+        Film film = new Film();  //chiave esterna
+        film.setId(filmId);     //chiave esterna
+        image.setFilm(film);     //chiave esterna
+
         imageRepository.save(image);
     }
 
@@ -45,11 +44,13 @@ public class ImageService {
         imageRepository.deleteById(id);
     }
 
-    //Aggiorna/Modifica ordine immagini
+    //Modifica ordine immagini
+    //Aggiorna
     public void update(Integer id, ImageRequest imageRequest) {
-        Optional<Image> imageOpt = imageRepository.findById(id);
+        Image imageByDB = imageRepository.findById(id).orElseThrow(() -> new RuntimeException("Immagine non trovata:"+id));
         Integer newViewingOrder=imageRequest.getViewingOrder();
-        imageOpt.get().setViewingOrder(newViewingOrder);
-        imageRepository.save(imageOpt.get());
+        imageByDB.setViewingOrder(newViewingOrder);
+
+        imageRepository.save(imageByDB);
     }
 }

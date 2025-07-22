@@ -1,11 +1,11 @@
 package com.actionict.customer.service;
 
 import com.actionict.customer.model.City;
+import com.actionict.customer.model.Country;
 import com.actionict.customer.repository.CityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -19,9 +19,7 @@ public class CityService {
 
     //Trova Uno
     public City findById(Integer id) {
-        Optional<City> byId = cityRepository.findById(id);
-        City city = byId.get();
-        return city;
+        return cityRepository.findById(id).orElseThrow(() -> new RuntimeException("Città non trovata:"+id));
     }
 
     //Inserisci
@@ -31,15 +29,15 @@ public class CityService {
 
     //Aggiorna
     public void update(Integer id, City city) {
-        Optional <City> cityOpt = cityRepository.findById(id);
+        City cityByDB = cityRepository.findById(id).orElseThrow(() -> new RuntimeException("Città non trovato:"+id));
         String newName=city.getName();
-        cityOpt.get().setName(newName);
-        //Country country= city.getCountry();
-        //Integer newCountryId=country.getId();
-        //Country countryByOpt=cityOpt.get().getCountry();
-        //countryByOpt.setId(newCountryId);
-        //cityOpt.get().setCountry(countryByOpt);
-        cityRepository.save(cityOpt.get());
+        cityByDB.setName(newName);
+        Country country= city.getCountry();   //chiave esterna
+        Integer newCountryId=country.getId();   //chiave esterna
+        Country countryByDB=cityByDB.getCountry();   //chiave esterna
+        countryByDB.setId(newCountryId);   //chiave esterna
+        cityByDB.setCountry(countryByDB);   //chiave esterna
+        cityRepository.save(cityByDB);
     }
 
     //Elimina

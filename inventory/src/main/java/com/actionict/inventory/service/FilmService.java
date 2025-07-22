@@ -6,6 +6,7 @@ import com.actionict.inventory.model.Language;
 import com.actionict.inventory.repository.FilmRepository;
 import com.actionict.inventory.repository.LanguageRepository;
 import com.actionict.inventory.request.FilmRequest;
+import com.actionict.inventory.responce.FilmResponce;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
@@ -24,10 +25,38 @@ public class FilmService {
     }
 
     //Trova Uno
-    public Film findById(Integer id) {
-        Optional<Film> byId = filmRepository.findById(id);
-        Film film = byId.get();
-        return film;
+    public FilmResponce findById(Integer id) {
+        Film film = filmRepository.findById(id).orElseThrow(() -> new RuntimeException("Film non trovato:"+id));
+
+        String title= film.getTitle();
+        String description= film.getDescription();
+        Integer releaseYear= film.getReleaseYear();
+        Language languageByFilm=film.getLanguage();   //chiave esterna
+        Integer languageId=languageByFilm.getId();    //chiave esterna
+        Integer originalLanguageId= film.getOriginalLanguageId();
+        Integer rentalDuration= film.getRentalDuration();
+        BigDecimal rentalRate=film.getRentalRate();
+        Integer lenght=film.getLength();
+        BigDecimal replacementCost=film.getReplacementCost();
+        EnumRating.Rating rating=film.getRating();   //IMP ENUM
+        String specialFeaturesString = film.getSpecialFeatures();   //IMP SET
+        String[] specialFeaturesArray = specialFeaturesString.split(",");    //IMP SET
+        Set<String> specialFeatures = new HashSet<>(Arrays.asList(specialFeaturesArray));   //IMP SET
+
+        FilmResponce filmResponce = new FilmResponce();
+        filmResponce.setId(id);
+        filmResponce.setTitle(title);
+        filmResponce.setDescription(description);
+        filmResponce.setReleaseYear(releaseYear);
+        filmResponce.setOriginalLanguageId(originalLanguageId);
+        filmResponce.setRentalDuration(rentalDuration);
+        filmResponce.setRentalRate(rentalRate);
+        filmResponce.setLength(lenght);
+        filmResponce.setReplacementCost(replacementCost);
+        filmResponce.setRating(rating);     //IMP ENUM
+        filmResponce.setSpecialFeatures(specialFeatures);
+
+        return filmResponce;
     }
 
     //Inserisci
@@ -35,68 +64,67 @@ public class FilmService {
         String title=filmRequest.getTitle();
         String description=filmRequest.getDescription();
         Integer releaseYear=filmRequest.getReleaseYear();
-        Language languageByFilmRequest=filmRequest.getLanguage();   //IMP
-        Integer languageId=languageByFilmRequest.getId();    //IMP
+        Language languageByFilmRequest=filmRequest.getLanguage();   //chiave esterna
+        Integer languageId=languageByFilmRequest.getId();    //chiave esterna
         Integer originalLanguageId=filmRequest.getOriginalLanguageId();
         Integer rentalDuration=filmRequest.getRentalDuration();
         BigDecimal rentalRate=filmRequest.getRentalRate();
         Integer length=filmRequest.getLength();
         BigDecimal replacementCost=filmRequest.getReplacementCost();
-        EnumRating.Rating rating=filmRequest.getRating();   //IMP todo ENUM
-        //Set specialFeatures=filmRequest.getSpecialFeatures();   //TODO SISTEMARE  SET
-
-
-        String specialFeaturesString = "";   //TODO SISTEMARE  SET
-        String[] specialFeaturesArray = specialFeaturesString.split(",");
-        //List<String> specialFeatures = new ArrayList<>(Arrays.asList(specialFeaturesArray));
-        Set<String> specialFeatures = new HashSet<>(Arrays.asList(specialFeaturesArray));
+        EnumRating.Rating rating=filmRequest.getRating();   //IMP ENUM
+        //Set<String> mySet = filmRequest.getSpecialFeatures();  //IMP SET  todo
+        Set mySet = filmRequest.getSpecialFeatures();  //IMP SET    todo
+        String setStringSpecialFeatures = mySet.toString();   //IMP SET
 
         Film film = new Film();
         film.setTitle(title);
         film.setDescription(description);
         film.setReleaseYear(releaseYear);
-        Language language=new Language();  //IMP
-        language.setId(languageId);    //IMP
-        film.setLanguage(language);    //IMP
+        Language language=new Language();  //chiave esterna
+        language.setId(languageId);    //chiave esterna
+        film.setLanguage(language);    //chiave esterna
         film.setOriginalLanguageId(originalLanguageId);
         film.setRentalDuration(rentalDuration);
         film.setRentalRate(rentalRate);
         film.setLength(length);
         film.setReplacementCost(replacementCost);
-        film.setRating(rating);   //ENUM     ToDo SISTEMARE
-        film.setSpecialFeatures(specialFeatures);   //SET    TODO SISTEMARE
-
-
-
-
-
+        film.setRating(rating);   //IMP ENUM
+        film.setSpecialFeatures(setStringSpecialFeatures);   //IMP SET
 
         filmRepository.save(film);
     }
 
     //Aggiorna
     public void update(Integer id, FilmRequest filmRequest) {
-        Optional<Film> filmOpt = filmRepository.findById(id);
+        Film filmByDB = filmRepository.findById(id).orElseThrow(() -> new RuntimeException("Film non trovato:"+id));
         String newTitle=filmRequest.getTitle();
         String newDescription=filmRequest.getDescription();
         Integer newReleaseYear=filmRequest.getReleaseYear();
+        Language languageByFilmRequest=filmRequest.getLanguage();   //chiave esterna
+        Integer languageId=languageByFilmRequest.getId();    //chiave esterna
         Integer newRentalDuration=filmRequest.getRentalDuration();
         BigDecimal newRentalRate=filmRequest.getRentalRate();
         Integer newLength=filmRequest.getLength();
         BigDecimal newReplacementCost=filmRequest.getReplacementCost();
-        EnumRating.Rating newRating=filmRequest.getRating();   //Enum TODO SISTEMARE
-        Set newSpecialFeatures=filmRequest.getSpecialFeatures();  ///SET TODO SISTEMARE
+        EnumRating.Rating newRating=filmRequest.getRating();   //IMP Enum
+        Set newSet=filmRequest.getSpecialFeatures();  //IMP SET  todo
+        //Set<String> newMySet = filmRequest.getSpecialFeatures();  //IMP SET  todo
+        String newStringSpecialFeatures = newSet.toString();   //IMP SET
 
-        filmOpt.get().setTitle(newTitle);
-        filmOpt.get().setDescription(newDescription);
-        filmOpt.get().setReleaseYear(newReleaseYear);
-        filmOpt.get().setRentalDuration(newRentalDuration);
-        filmOpt.get().setRentalRate(newRentalRate);
-        filmOpt.get().setLength(newLength);
-        filmOpt.get().setReplacementCost(newReplacementCost);
-        filmOpt.get().setRating(newRating);  //IMP TODO ENUM
-        filmOpt.get().setSpecialFeatures(newSpecialFeatures);   //SET TODO SISTEMARE
-        filmRepository.save(filmOpt.get());
+        filmByDB.setTitle(newTitle);
+        filmByDB.setDescription(newDescription);
+        filmByDB.setReleaseYear(newReleaseYear);
+        Language language=new Language();  //chiave esterna
+        language.setId(languageId);    //chiave esterna
+        filmByDB.setLanguage(language);    //chiave esterna
+        filmByDB.setRentalDuration(newRentalDuration);
+        filmByDB.setRentalRate(newRentalRate);
+        filmByDB.setLength(newLength);
+        filmByDB.setReplacementCost(newReplacementCost);
+        filmByDB.setRating(newRating);  //IMP ENUM
+        filmByDB.setSpecialFeatures(newStringSpecialFeatures);   //IMP SET
+
+        filmRepository.save(filmByDB);
     }
 
     //Elimina

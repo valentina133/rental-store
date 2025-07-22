@@ -41,7 +41,4 @@ public class ActorController {
     public void deleteActor(@PathVariable Integer id){
         actorService.deleteById(id);
     }
-
-
-
 }

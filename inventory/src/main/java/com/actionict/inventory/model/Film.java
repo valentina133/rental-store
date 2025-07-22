@@ -65,13 +65,7 @@ public class Film implements Serializable {
     @Column(name="rating")
     public EnumRating.Rating rating;
 
-    /*
-    for( Giorno d : Giorno.values() ) {
-System.err.println(d);
-}
-     */
-
-    //campo di tipo SET sul DB
+    //campo di tipo SET lo si dichiara come stringa su db e poi si converte in HashSet nel codice
     String specialFeatures="Trailers, Commentaries, Deleted Scenes, Behind the Scenes";
 
 
@@ -80,17 +74,6 @@ System.err.println(d);
     private Set<String> specialFeatures = new HashSet();
     */
 
-
-/*
-    //campo di tipo SET sul DB    import java.util.HashSet;   import java.util.Set;
-    @Column(name = "special_features")
-    private Set<String> special_features; // Campo SET nel database, rappresentato come Set<String> in Java
-    //private Set<String> special_features= new HashSet<>();
-*/
-    //@CreatedDate   //usato in Spring Data
-    //@CreationTimestamp //this adds the default timestamp on save   //è presente solo in Hibernate e non Spring Data
-    //@UpdateTimestamp   //Updates the last modified date when an entity is updated.
-    //@Temporal(TemporalType.TIMESTAMP)
     @UpdateTimestamp
     @Column(name = "last_update", nullable=false)
     private LocalDateTime lastUpdate;

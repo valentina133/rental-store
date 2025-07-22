@@ -1,4 +1,4 @@
-package com.actionict.inventory.request;
+package com.actionict.inventory.responce;
 
 import com.actionict.inventory.model.EnumRating;
 import com.actionict.inventory.model.Language;
@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Data
-public class FilmRequest implements Serializable {
+public class FilmResponce implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -43,7 +43,7 @@ public class FilmRequest implements Serializable {
     //campo di tipo ENUM sul DB
     public EnumRating.Rating rating;
 
-    //campo di tipo SET sul DB
+    //campo di tipo SET
     private Set<String> specialFeatures = new HashSet();
 
     @UpdateTimestamp

@@ -10,7 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -24,9 +23,7 @@ public class CustomerService {
 
     //Trova Uno
     public Customer findById(Integer id) {
-        Optional<Customer> byId = customerRepository.findById(id);
-        Customer customer = byId.get();
-        return customer;
+        return customerRepository.findById(id).orElseThrow(() -> new RuntimeException("Cliente non trovato:"+id));
     }
 
     //Inserisci
@@ -36,23 +33,25 @@ public class CustomerService {
 
     //Aggiorna
     public void update(Integer id, Customer customer) {
-        Optional<Customer> customerOpt = customerRepository.findById(id);
+        Customer customerByDB = customerRepository.findById(id).orElseThrow(() -> new RuntimeException("Cliente non trovato:"+id));;
         String newFirstName=customer.getFirstName();
         String newLastName=customer.getLastName();
         String newEmail=customer.getEmail();
         Boolean newActive=customer.getActive();
         LocalDateTime newCreateDate=customer.getCreateDate();
-        //Address address=customer.getAddress();
-        //Integer newAddressId=address.getId();
-        customerOpt.get().setFirstName(newFirstName);
-        customerOpt.get().setLastName(newLastName);
-        customerOpt.get().setEmail(newEmail);
-        customerOpt.get().setActive(newActive);
-        customerOpt.get().setCreateDate(newCreateDate);
-        //Address addressByOpt=customerOpt.get().getAddress();
-        //addressByOpt.setId(newAddressId);
-        //customerOpt.get().setAddress(addressByOpt);
-        customerRepository.save(customerOpt.get());
+        Address address=customer.getAddress();   //chiave esterna
+        Integer newAddressId=address.getId();    //chiave esterna
+
+        customerByDB.setFirstName(newFirstName);
+        customerByDB.setLastName(newLastName);
+        customerByDB.setEmail(newEmail);
+        customerByDB.setActive(newActive);
+        customerByDB.setCreateDate(newCreateDate);
+        Address addressByDB=customerByDB.getAddress();   //chiave esterna
+        addressByDB.setId(newAddressId);       //chiave esterna
+        customerByDB.setAddress(addressByDB);      //chiave esterna
+
+        customerRepository.save(customerByDB);
     }
 
     //Elimina

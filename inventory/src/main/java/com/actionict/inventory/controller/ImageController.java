@@ -1,6 +1,5 @@
 package com.actionict.inventory.controller;
 
-import com.actionict.inventory.model.Film;
 import com.actionict.inventory.model.Image;
 import com.actionict.inventory.request.ImageRequest;
 import com.actionict.inventory.service.ImageService;
@@ -19,12 +18,7 @@ public class ImageController {
     //Inserisci
     @PostMapping
     public void addImage(@RequestBody ImageRequest imageRequest) {
-        /*String description=image.getDescription();
-        Integer viewingOrder=image.getViewingOrder();
-        String pathImage=image.getPathImage();
-        Film film = image.getFilm();  //Imp
-        Integer filmId=film.getId();  //Imp  */
-        imageService.inserisci(imageRequest);
+               imageService.inserisci(imageRequest);
     }
 
     //Recupera tutte le immagini sul db

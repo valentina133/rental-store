@@ -5,7 +5,6 @@ import com.actionict.customer.repository.CountryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -20,9 +19,7 @@ public class CountryService {
 
     //Trova Uno
     public Country findById(Integer id) {
-        Optional<Country> byId = countryRepository.findById(id);
-        Country country = byId.get();
-        return country;
+        return countryRepository.findById(id).orElseThrow(() -> new RuntimeException("Paese non trovato:"+id));
     }
 
     //Inserisci
@@ -32,10 +29,10 @@ public class CountryService {
 
     //Aggiorna
     public void update(Integer id, Country country) {
-        Optional<Country> countryOpt = countryRepository.findById(id);
+        Country countryByDB = countryRepository.findById(id).orElseThrow(() -> new RuntimeException("Paese non trovato:"+id));
         String newName=country.getName();
-        countryOpt.get().setName(newName);
-        countryRepository.save(countryOpt.get());
+        country.setName(newName);
+        countryRepository.save(countryByDB);
     }
 
     //Elimina
