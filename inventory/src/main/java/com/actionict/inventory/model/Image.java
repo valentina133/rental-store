@@ -18,9 +18,6 @@ public class Image {
     @Column(name = "description", length=255, nullable=false)
     private String description;
 
-    @Column(name = "viewing_order", nullable=false)
-    private Integer viewingOrder;
-
     @Column(name = "pathImage", length=255, nullable=false)
     private String pathImage;
 

@@ -10,7 +10,6 @@ public class ImageRequest {
 
     private Integer id;
     private String description;
-    private Integer viewingOrder;
     private String pathImage;
 
     @UpdateTimestamp

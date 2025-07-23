@@ -31,10 +31,11 @@ public class ImageController {
         imageService.deleteById(id);
     }
 
-    //modifica ordine immagini
-    //aggiorna
-    @PutMapping("/{id}")
-    public void updateImage(@PathVariable Integer id, @RequestBody ImageRequest imageRequest){
-        imageService.update(id, imageRequest);
+    //Trova tutte le immagini ordinate tramite Descrizione secondo l'ordine ascendente o discendente
+    //Endpoint   /images?direction=desc
+    @GetMapping("/{direction}")
+    public List<Image> getAllImagesSorted(@PathVariable  String direction)
+    {
+        return imageService.getAllImagesSortedByDescription(direction);
     }
 }

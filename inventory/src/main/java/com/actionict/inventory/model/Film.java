@@ -1,15 +1,15 @@
 package com.actionict.inventory.model;
 
 import jakarta.persistence.*;
+import jakarta.persistence.Table;
 import lombok.Data;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.UpdateTimestamp;
 
 @Data
 @Entity
@@ -36,31 +36,26 @@ public class Film implements Serializable {
     private Integer releaseYear;
 
     //campo di tipo TINYINT sul DB
-    @ColumnDefault("NULL")
     @Column(name = "original_language_id")
     private Integer originalLanguageId;
 
     //campo di tipo TINYINT sul DB
-    @ColumnDefault("3")
-    @Column(name = "rental_duration", nullable=false)
+    @Column(name = "rental_duration")
     private Integer rentalDuration;
 
     //campo di tipo DECIMAL sul DB    import java.math.BigDecimal;
-    @ColumnDefault("4.99")
-    @Column(name = "rental_rate", nullable=false)
+    @Column(name = "rental_rate")
     private BigDecimal rentalRate;
 
     @Column(name = "length", nullable=false)
     private Integer length;
 
     //campo di tipo DECIMAL sul DB
-    @ColumnDefault("19.99")
-    @Column(name = "replacement_cost", nullable=false)
+    @Column(name = "replacement_cost")
     private BigDecimal replacementCost;
 
     //campo di tipo ENUM sul DB
     //@Enumerated(EnumType.ORDINAL) //value will be saved to the base as a number
-    @ColumnDefault("G")
     @Enumerated(EnumType.STRING)    //value will be saved to the base as a string
     @Column(name="rating")
     public EnumRating.Rating rating;
@@ -82,4 +77,20 @@ public class Film implements Serializable {
     @JoinColumn(name="language_id", nullable=false)
     private Language language;
 
+    //Per settere i valori di default
+    @PrePersist
+    public void prePersist() {
+        if (rentalDuration == null) {
+            rentalDuration = 3;
+        }
+        if (rentalRate == null) {
+            rentalRate = BigDecimal.valueOf(4.99);
+        }
+        if (replacementCost == null) {
+            replacementCost = BigDecimal.valueOf(19.99);
+        }
+        if (rating == null) {
+            rating = rating.G;
+        }
+    }
 }
