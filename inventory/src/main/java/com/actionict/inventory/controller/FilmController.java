@@ -33,8 +33,6 @@ public class FilmController {
     //aggiorna
     @PutMapping("/{id}")
     public void updateFilm(@PathVariable Integer id, @RequestBody FilmRequest filmRequest){
-        //Film.Rating rating=film.getRating();   //todo sistemare
-        //Set specialFeatures=film.getSpecialFeatures();   //todo sistemare
         filmService.update(id, filmRequest);
     }
 
