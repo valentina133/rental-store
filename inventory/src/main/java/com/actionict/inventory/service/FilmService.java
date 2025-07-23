@@ -48,13 +48,16 @@ public class FilmService {
         filmResponce.setTitle(title);
         filmResponce.setDescription(description);
         filmResponce.setReleaseYear(releaseYear);
+        Language language=new Language();  //chiave esterna
+        language.setId(languageId);    //chiave esterna
+        filmResponce.setLanguage(language);    //chiave esterna
         filmResponce.setOriginalLanguageId(originalLanguageId);
         filmResponce.setRentalDuration(rentalDuration);
         filmResponce.setRentalRate(rentalRate);
         filmResponce.setLength(lenght);
         filmResponce.setReplacementCost(replacementCost);
         filmResponce.setRating(rating);     //IMP ENUM
-        filmResponce.setSpecialFeatures(specialFeatures);
+        filmResponce.setSpecialFeatures(specialFeatures);  //IMP SET
 
         return filmResponce;
     }
