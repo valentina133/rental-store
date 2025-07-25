@@ -2,6 +2,7 @@ package com.actionict.customer.service;
 
 import com.actionict.customer.model.Address;
 import com.actionict.customer.model.City;
+import com.actionict.customer.model.Country;
 import com.actionict.customer.repository.AddressRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -36,15 +37,12 @@ public class AddressService {
         String newPostalCode=address.getPostalCode();
         String newPhone=address.getPhone();
         City city=address.getCity();  //Chiave esterna
-        Integer newCityId=city.getId();   //Chiave esterna
         addressByDB.setAddress(newAddress);
         addressByDB.setAddress2(newAddress2);
         addressByDB.setDistrict(newDistrict);
         addressByDB.setPostalCode(newPostalCode);
         addressByDB.setPhone(newPhone);
-        City cityByOpt=addressByDB.getCity();   //Chiave esterna
-        cityByOpt.setId(newCityId);      //Chiave esterna
-        //addressOpt.get().setCity(cityByOpt);
+        addressByDB.setCity(city);     //Chiave esterna
         addressRepository.save(addressByDB);
     }
 

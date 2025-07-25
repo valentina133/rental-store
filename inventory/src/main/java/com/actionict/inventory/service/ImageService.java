@@ -5,7 +5,6 @@ import com.actionict.inventory.model.Image;
 import com.actionict.inventory.repository.ImageRepository;
 import com.actionict.inventory.request.ImageRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -22,14 +21,11 @@ public class ImageService {
         String description=imageRequest.getDescription();
         String pathImage=imageRequest.getPathImage();
         Film filmByImageRequest=imageRequest.getFilm();   //chiave esterna
-        Integer filmId=filmByImageRequest.getId();   //chiave esterna
 
         Image image = new Image();
         image.setDescription(description);
         image.setPathImage(pathImage);
-        Film film = new Film();  //chiave esterna
-        film.setId(filmId);     //chiave esterna
-        image.setFilm(film);     //chiave esterna
+        image.setFilm(filmByImageRequest);     //chiave esterna
 
         imageRepository.save(image);
     }

@@ -40,16 +40,13 @@ public class CustomerService {
         Boolean newActive=customer.getActive();
         LocalDateTime newCreateDate=customer.getCreateDate();
         Address address=customer.getAddress();   //chiave esterna
-        Integer newAddressId=address.getId();    //chiave esterna
 
         customerByDB.setFirstName(newFirstName);
         customerByDB.setLastName(newLastName);
         customerByDB.setEmail(newEmail);
         customerByDB.setActive(newActive);
         customerByDB.setCreateDate(newCreateDate);
-        Address addressByDB=customerByDB.getAddress();   //chiave esterna
-        addressByDB.setId(newAddressId);       //chiave esterna
-        customerByDB.setAddress(addressByDB);      //chiave esterna
+        customerByDB.setAddress(address);      //chiave esterna
 
         customerRepository.save(customerByDB);
     }

@@ -32,7 +32,6 @@ public class FilmService {
         String description= film.getDescription();
         Integer releaseYear= film.getReleaseYear();
         Language languageByFilm=film.getLanguage();   //chiave esterna
-        Integer languageId=languageByFilm.getId();    //chiave esterna
         Integer originalLanguageId= film.getOriginalLanguageId();
         Integer rentalDuration= film.getRentalDuration();
         BigDecimal rentalRate=film.getRentalRate();
@@ -48,9 +47,7 @@ public class FilmService {
         filmResponce.setTitle(title);
         filmResponce.setDescription(description);
         filmResponce.setReleaseYear(releaseYear);
-        Language language=new Language();  //chiave esterna
-        language.setId(languageId);    //chiave esterna
-        filmResponce.setLanguage(language);    //chiave esterna
+        filmResponce.setLanguage(languageByFilm);    //chiave esterna
         filmResponce.setOriginalLanguageId(originalLanguageId);
         filmResponce.setRentalDuration(rentalDuration);
         filmResponce.setRentalRate(rentalRate);
@@ -68,7 +65,6 @@ public class FilmService {
         String description=filmRequest.getDescription();
         Integer releaseYear=filmRequest.getReleaseYear();
         Language languageByFilmRequest=filmRequest.getLanguage();   //chiave esterna
-        Integer languageId=languageByFilmRequest.getId();    //chiave esterna
         Integer originalLanguageId=filmRequest.getOriginalLanguageId();
         Integer rentalDuration=filmRequest.getRentalDuration();
         BigDecimal rentalRate=filmRequest.getRentalRate();
@@ -83,9 +79,7 @@ public class FilmService {
         film.setTitle(title);
         film.setDescription(description);
         film.setReleaseYear(releaseYear);
-        Language language=new Language();  //chiave esterna
-        language.setId(languageId);    //chiave esterna
-        film.setLanguage(language);    //chiave esterna
+        film.setLanguage(languageByFilmRequest);    //chiave esterna
         film.setOriginalLanguageId(originalLanguageId);
         film.setRentalDuration(rentalDuration);
         film.setRentalRate(rentalRate);

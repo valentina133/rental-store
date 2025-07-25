@@ -33,10 +33,7 @@ public class CityService {
         String newName=city.getName();
         cityByDB.setName(newName);
         Country country= city.getCountry();   //chiave esterna
-        Integer newCountryId=country.getId();   //chiave esterna
-        Country countryByDB=cityByDB.getCountry();   //chiave esterna
-        countryByDB.setId(newCountryId);   //chiave esterna
-        cityByDB.setCountry(countryByDB);   //chiave esterna
+        cityByDB.setCountry(country);   //chiave esterna
         cityRepository.save(cityByDB);
     }
 

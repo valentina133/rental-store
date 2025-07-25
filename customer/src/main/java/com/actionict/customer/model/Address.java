@@ -2,6 +2,8 @@ package com.actionict.customer.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import java.time.LocalDateTime;
 
 @Data
@@ -29,6 +31,7 @@ public class Address {
     @Column(name = "phone", length=20)
     private String phone;
 
+    @UpdateTimestamp
     @Column(name = "last_update")
     private LocalDateTime lastUpdate;
 
