@@ -3,6 +3,9 @@ package com.actionict.SpringCloudGateway;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import org.springframework.cloud.gateway.route.RouteLocator;
+import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
+
 @Configuration
 public class GatewayConfiguration {
     @Bean
