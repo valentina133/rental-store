@@ -1,22 +1,15 @@
 package com.actionict.customer.controller;
 
-import com.actionict.customer.model.Address;
-import com.actionict.customer.model.Country;
 import com.actionict.customer.model.Customer;
 import com.actionict.customer.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Objects;
-//import javax.validation.constraints.Size;
-@Validated
 @RestController
 @RequestMapping("/customers")
 @RequiredArgsConstructor
@@ -31,48 +24,30 @@ public class CustomerController {
 
     //trova uno
     @GetMapping("/{id}")
-    public Object getCustomers(@PathVariable Integer id){
+    public Customer getCustomers(@PathVariable Integer id){
         return customerService.findById(id);
     }
 
     //inserisci
     @PostMapping
     public void addCustomer(@RequestBody Customer customer) {
-        //Integer id=customer.getId();
-        String firstName=customer.getFirstName();
-        String lastName=customer.getLastName();
-        String email=customer.getEmail();
-        Boolean active=customer.getActive();
-        LocalDateTime createData=customer.getCreateDate();
-        Address address=customer.getAddress();
-        Integer id=address.getId();
-        customerService.inserisci(firstName, lastName, email, active, createData, id);
+        customerService.inserisci(customer);
     }
 
     //aggiorna
-    @PutMapping
-    public void updateCustomer(@RequestBody Customer customer){
-        Integer id=customer.getId();
-        String firstName=customer.getFirstName();
-        String lastName=customer.getLastName();
-        String email=customer.getEmail();
-        Boolean active=customer.getActive();
-        LocalDateTime createData=customer.getCreateDate();
-        customerService.update(id, firstName, lastName, email, active, createData);
+    @PutMapping("/{id}")
+    public void updateCustomer(@PathVariable Integer id, @RequestBody Customer customer){
+        customerService.update(id, customer);
     }
 
-    
     //Elimina
     @DeleteMapping("/{id}")
     public void deleteCustomer(@PathVariable Integer id){
         customerService.deleteById(id);
     }
 
-    //ToDo ? Discernetra le due getMapping aggiungendo all'endpoint la coppia chiave-valore GET /customers?byFirstNameOppByLastName=lastName
+    //Discerne tra le due getMapping aggiungendo all'endpoint la coppia chiave-valore
     //Ricerca filtrata e paginata
-    //@GetMapping cosi da errore in quanto vi è già un @GetMapping di getAllCustomers
-    //@GetMapping("?firstName=mario&lastName=Rossi")
-    //@GetMapping("/native/?firstName=mario||lastName=Rossi")
     @GetMapping("?firstName=mario||lastName=Rossi")
     public Page<Customer> getFilterPaginatedCustomers(
             @RequestParam (required = false) String firstName,

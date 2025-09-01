@@ -1,7 +1,6 @@
 package com.actionict.customer.controller;
 
 import com.actionict.customer.model.City;
-import com.actionict.customer.model.Country;
 import com.actionict.customer.service.CityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,28 +24,21 @@ public class CityController {
 
     //trova uno
     @GetMapping("/{id}")
-    public Object getCity(@PathVariable Integer id){
+    public City getCity(@PathVariable Integer id){
         return cityService.findById(id);
     }
 
     //inserisci
     @PostMapping
     public void addCity(@RequestBody City city) {
-        //Integer id=city.getId();
-        String name= city.getName();
-        Country country=city. getCountry();
-        Integer id=country.getId();
-        cityService.inserisci(name, id);
+        cityService.inserisci(city);
     }
 
     //aggiorna ok
-    @PutMapping
-    public void updateCity(@RequestBody City city){
-        Integer id=city.getId();
-        String name= city.getName();
-        cityService.update(id, name);
+    @PutMapping("/{id}")
+    public void updateCity(@PathVariable Integer id, @RequestBody City city){
+        cityService.update(id, city);
     }
-
 
     //Elimina ok
     @DeleteMapping("/{id}")

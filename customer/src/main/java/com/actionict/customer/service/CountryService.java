@@ -1,14 +1,10 @@
 package com.actionict.customer.service;
 
-import com.actionict.customer.model.City;
 import com.actionict.customer.model.Country;
 import com.actionict.customer.repository.CountryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -22,26 +18,21 @@ public class CountryService {
     }
 
     //Trova Uno
-    public Object findById(Integer id) {
-
-        return countryRepository.findById(id);
+    public Country findById(Integer id) {
+        return countryRepository.findById(id).orElseThrow(() -> new RuntimeException("Paese non trovato:"+id));
     }
 
     //Inserisci
-    public void inserisci(String name) {
-        //public void inserisci(Integer id, String name) {
-        Country country = new Country();
-        //country.setId(id);
-        country.setName(name);
+    public void inserisci(Country country) {
         countryRepository.save(country);
     }
 
     //Aggiorna
-    public void update(Integer id, String newName) {
-        Optional<Country> country = countryRepository.findById(id);
-        //country.get()
-        country.get().setName(newName);
-        countryRepository.save(country.get());
+    public void update(Integer id, Country country) {
+        Country countryByDB = countryRepository.findById(id).orElseThrow(() -> new RuntimeException("Paese non trovato:"+id));
+        String newName=country.getName();
+        country.setName(newName);
+        countryRepository.save(countryByDB);
     }
 
     //Elimina

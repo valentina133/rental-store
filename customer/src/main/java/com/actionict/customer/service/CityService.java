@@ -5,10 +5,7 @@ import com.actionict.customer.model.Country;
 import com.actionict.customer.repository.CityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.Optional;
-
 
 @Service
 @RequiredArgsConstructor
@@ -21,33 +18,27 @@ public class CityService {
     }
 
     //Trova Uno
-    public Object findById(Integer id) {
-
-        return cityRepository.findById(id);
+    public City findById(Integer id) {
+        return cityRepository.findById(id).orElseThrow(() -> new RuntimeException("Città non trovata:"+id));
     }
 
     //Inserisci
-    public void inserisci(String name, Integer id) {
-        City city = new City();
-        //city.setId(id);
-        city.setName(name);
-        Country country = new Country();
-        country.setId(id);
-        city.setCountry(country);
+    public void inserisci(City city) {
         cityRepository.save(city);
     }
 
     //Aggiorna
-    public void update(Integer id, String newName) {
-        Optional <City> city = cityRepository.findById(id);
-        //City city = (City) cityObject;
-        //city.setName(newName);
-        city.get().setName(newName);
-        cityRepository.save(city.get());
+    public void update(Integer id, City city) {
+        City cityByDB = cityRepository.findById(id).orElseThrow(() -> new RuntimeException("Città non trovato:"+id));
+        String newName=city.getName();
+        cityByDB.setName(newName);
+        Country country= city.getCountry();   //chiave esterna
+        cityByDB.setCountry(country);   //chiave esterna
+        cityRepository.save(cityByDB);
     }
 
     //Elimina
-     public void deleteById(Integer id) {
+    public void deleteById(Integer id) {
         cityRepository.deleteById(id);
     }
 }

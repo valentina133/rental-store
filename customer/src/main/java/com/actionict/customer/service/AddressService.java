@@ -6,10 +6,7 @@ import com.actionict.customer.model.Country;
 import com.actionict.customer.repository.AddressRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -22,45 +19,35 @@ public class AddressService {
     }
 
     //Trova Uno
-    public Object findById(Integer id) {
-
-        Optional<Address> byId = addressRepository.findById(id);
-        return byId;
-        //return addressRepository.findById(id);
+    public Address findById(Integer id) {
+        return addressRepository.findById(id).orElseThrow(() -> new RuntimeException("Indirizzo non trovato:"+id));
     }
 
     //Inserisci
-    public void inserisci(String address, String address2, String district, String postalCode, String phone, Integer id) {
-        Address addressOfInsert=new Address();
-        //addressOfInsert.setId(id);
-        addressOfInsert.setAddress(address);
-        addressOfInsert.setAddress2(address2);
-        addressOfInsert.setDistrict(district);
-        addressOfInsert.setPostalCode(postalCode);
-        addressOfInsert.setPhone(phone);
-        City city = new City();
-        city.setId(id);
-        addressOfInsert.setCity(city);
-        addressRepository.save(addressOfInsert);
+    public void inserisci(Address address) {
+        addressRepository.save(address);
     }
 
     //Aggiorna
-    public void update(Integer id, String newAddress, String newAddress2, String newDistrict, String newPostalCode, String newPhone) {
-        Optional<Address> address = addressRepository.findById(id);
-        //Address address = (Address) addressObject;
-        //address.setId(id);
-        //address.get().setId(id); //non serve, c'è GenerationType.IDENTITY
-        address.get().setAddress(newAddress);
-        address.get().setAddress2(newAddress2);
-        address.get().setDistrict(newDistrict);
-        address.get().setPostalCode(newPostalCode);
-        address.get().setPhone(newPhone);
-        addressRepository.save(address.get());
+    public void update(Integer id, Address address) {
+        Address addressByDB = addressRepository.findById(id).orElseThrow(() -> new RuntimeException("Indirizzo non trovato:"+id));
+        String newAddress=address.getAddress();
+        String newAddress2=address.getAddress2();
+        String newDistrict=address.getDistrict();
+        String newPostalCode=address.getPostalCode();
+        String newPhone=address.getPhone();
+        City city=address.getCity();  //Chiave esterna
+        addressByDB.setAddress(newAddress);
+        addressByDB.setAddress2(newAddress2);
+        addressByDB.setDistrict(newDistrict);
+        addressByDB.setPostalCode(newPostalCode);
+        addressByDB.setPhone(newPhone);
+        addressByDB.setCity(city);     //Chiave esterna
+        addressRepository.save(addressByDB);
     }
 
-
-        //Elimina
-        public void deleteById (Integer id){
+    //Elimina
+    public void deleteById (Integer id){
             addressRepository.deleteById(id);
         }
     }

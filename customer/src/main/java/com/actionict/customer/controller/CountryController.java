@@ -4,7 +4,6 @@ import com.actionict.customer.model.Country;
 import com.actionict.customer.service.CountryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -19,25 +18,20 @@ public class CountryController {
 
     //trova uno
     @GetMapping("/{id}")
-    public Object getCountries(@PathVariable Integer id){
+    public Country getCountries(@PathVariable Integer id){
         return countryService.findById(id);
     }
 
     //inserisci
     @PostMapping
     public void addCountry(@RequestBody Country country) {
-        //Integer id=country.getId();
-        String name=country.getName();
-        countryService.inserisci(name);
-        //countryService.inserisci(id, name);
+        countryService.inserisci(country);
     }
 
     //aggiorna
-    @PutMapping
-    public void updateCountry(@RequestBody Country country){
-        Integer id=country.getId();
-        String name=country.getName();
-        countryService.update(id, name);
+    @PutMapping("/{id}")
+    public void updateCountry(@PathVariable Integer id, @RequestBody Country country){
+        countryService.update(id, country);
     }
 
     //Elimina
@@ -45,7 +39,4 @@ public class CountryController {
     public void deleteCountry(@PathVariable Integer id){
         countryService.deleteById(id);
     }
-
-
-
 }

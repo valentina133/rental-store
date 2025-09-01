@@ -1,14 +1,10 @@
 package com.actionict.customer.model;
 
 import jakarta.persistence.*;
-//import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import lombok.RequiredArgsConstructor;
-@RequiredArgsConstructor
-//@AllArgsConstructor
 
 @Data
 @Entity
@@ -35,16 +31,11 @@ public class Address {
     @Column(name = "phone", length=20)
     private String phone;
 
+    @UpdateTimestamp
     @Column(name = "last_update")
     private LocalDateTime lastUpdate;
 
     @ManyToOne
-    //@JoinColumn(name="city_id", referencedColumnName = "id", nullable=false)
     @JoinColumn(name="city_id", nullable=false)
     private City city;
-
-    /* Lo tolgo perché il risultato della get è composto da una serie di oggetti annidati, oltre la strutture definita nel model
-    @OneToMany(mappedBy="address", orphanRemoval=true)
-    private List<Customer> customer;
-     */
 }
